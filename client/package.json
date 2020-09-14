@@ -1,0 +1,23 @@
+{
+  "name": "fb-web-client",
+  "version": "0.0.1",
+  "description": "framebastard web client",
+  "private": true,
+  "dependencies": {
+    "@polymer/app-route": "^3.0.2",
+    "@polymer/iron-ajax": "^3.0.1",
+    "@polymer/polymer": "^3.4.1",
+    "@webcomponents/webcomponentsjs": "^2.4.4"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "chokidar-cli": "^2.1.0",
+    "eslint": "^7.5.0",
+    "html-minifier": "^4.0.0",
+    "rollup": "^2.23.0",
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-gzip": "^2.5.0",
+    "rollup-plugin-minify-html-literals": "^1.2.4",
+    "rollup-plugin-terser": "^6.1.0"
+  }
+}

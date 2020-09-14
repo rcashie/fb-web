@@ -1,0 +1,12 @@
+SELECT
+    SPLIT(meta(`prop`).id, "::")[1] AS id,
+    SPLIT(meta(`prop`).id, "::")[2] AS version,
+    prop.document
+FROM `proposed` AS prop
+WHERE
+    prop.type = "proposal"
+    AND prop.status = "approved"
+    AND prop.target = $target
+    AND prop.closed < TONUMBER($time_stamp)
+ORDER BY prop.closed DESC
+LIMIT 1

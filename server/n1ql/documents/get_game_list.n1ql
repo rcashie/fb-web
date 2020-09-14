@@ -1,0 +1,22 @@
+SELECT RAW {
+    "totalCount": (
+        SELECT RAW COUNT(*)
+        FROM `published`
+        WHERE
+            type = "game"
+    )[0],
+    "page": (
+        SELECT
+            SUBSTR(meta(`game`).id, 6) AS id,
+            game.title,
+            game.type,
+            game.media,
+            IFMISSING(game.attributes[0:3], game.attributes) AS attributes
+        FROM `published` AS game
+        WHERE
+            game.type = "game"
+        ORDER BY game.title
+        OFFSET $offset
+        LIMIT $limit
+    )
+}

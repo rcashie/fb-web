@@ -1,0 +1,22 @@
+-- used by: server/n1ql/proposals/get_list_desc.n1ql
+CREATE INDEX `all-list-desc` ON `proposed`(status, created DESC) WHERE type="proposal";
+
+-- used by: server/n1ql/proposals/get_list_asc.n1ql
+CREATE INDEX `all-list-asc` ON `proposed`(status, created ASC) WHERE type="proposal";
+
+-- used by: server/n1ql/proposals/get_list_for_author_desc.n1ql
+CREATE INDEX `author-list-desc` ON `proposed`(status, authorId, created DESC) WHERE type="proposal";
+
+-- used by: server/n1ql/proposals/get_list_for_author_asc.n1ql
+CREATE INDEX `author-list-asc` ON `proposed`(status, authorId, created ASC) WHERE type="proposal";
+
+-- used by: server/n1ql/proposals/get_list_for_target_desc.n1ql
+CREATE INDEX `target-list-desc` ON `proposed`(status, target, created DESC) WHERE type="proposal";
+
+-- used by: server/n1ql/proposals/get_list_for_target_asc.n1ql
+CREATE INDEX `target-list-asc` ON `proposed`(status, target, created DESC) WHERE type="proposal";
+
+-- used by:
+-- server/n1ql/proposals/get_last_approved.n1ql
+-- server/n1ql/proposals/get_latest_authors.n1ql
+CREATE INDEX `approved-list` ON `proposed`(target, closed DESC) WHERE type="proposal" AND status = "approved";

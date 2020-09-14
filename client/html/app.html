@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Community frame data | framebastard </title>
+        <link rel="icon" href="/static/images/logo-inverse.svg" sizes="any" type="image/svg+xml">
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Sniglet:400|Montserrat:400,600');
+
+            :root {
+                --color-page: #ffffff;
+                --color-page-alt: #f0f0f0;
+                --color-page-inverse: #202020;
+
+                --color-border: #dddddd;
+                --color-darker-border: #545454;
+
+                --color-game: #ec576b;
+                --color-char: #4ec5c1;
+                --color-move: #f6b44c;
+
+                --color-text: var(--color-page-inverse);
+                --color-text-inverse: var(--color-page);
+                --color-text-hyperlink: var(--color-game);
+                --color-text-note: #737373;
+                --color-invalid-input: #ff7676;
+
+                --color-sentiment-neutral: var(--color-page-alt);
+                --color-sentiment-positive: #caeded;
+                --color-sentiment-negative: #fdeaed;
+
+                --color-button-action: var(--color-char);
+                --color-button-neutral: var(--color-page);
+                --color-disabled-button-action: #caeded;
+                --color-disabled-button: var(--color-page-alt);
+
+                --space-x-small: 0.15rem;
+                --space-small: 0.2rem;
+                --space-medium: 0.5rem;
+                --space-large: 0.7rem;
+                --space-section: 1.4rem;
+
+                --page-max-width: 50rem;
+
+                --border-size: 1px;
+                --border-radius: 0.2rem;
+
+                --media-height-small: 6rem;
+                --media-height-large: 7rem;
+
+                --font-size-normal: 0.8rem;
+                --font-size-small: 0.75rem;
+                --font-size-header-large: 1rem;
+                --font-size-header-medium: 0.9rem;
+
+                --font-weight-normal: 400;
+                --font-weight-bold: 600;
+
+                --line-height-small: 0.9rem;
+                --line-height-medium: 1.5rem;
+            }
+
+            html {
+                -webkit-text-size-adjust: 100%;
+            }
+
+            body {
+                margin: 0;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: var(--font-weight-normal);
+                font-size: var(--font-size-normal);
+                line-height: var(--line-height-medium);
+                color: var(--color-text);
+            }
+
+            body.modal-open {
+                overflow: hidden;
+            }
+
+            .stencil {
+                background-color: var(--color-page-inverse);
+                height: 2.5rem;
+            }
+
+            fb-app[unresolved] {
+                display: none;
+            }
+        </style>
+
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-52XHN7W');</script>
+        <!-- End Google Tag Manager -->
+
+        <script src="/static/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js" async></script>
+        <script src="/static/cmps/fb-app.js" type="module" async></script>
+    </head>
+
+    <body>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-52XHN7W"
+                height="0"
+                width="0"
+                style="display:none;visibility:hidden"
+            >
+            </iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
+        <div class="stencil">
+        </div>
+
+        <fb-app unresolved>
+        </fb-app>
+    </body>
+
+    <script type="text/javascript">
+        let stencil = document.querySelector(".stencil"),
+            app = document.querySelector("fb-app");
+
+        app.addEventListener('ready', function (event) {
+            window.requestAnimationFrame(function () {
+                document.body.removeChild(stencil);
+                app.attributes.removeNamedItem('unresolved');
+            })
+        });
+    </script>
+</html>

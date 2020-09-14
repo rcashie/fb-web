@@ -1,0 +1,10 @@
+SELECT DISTINCT
+    prop.authorId AS id,
+    prop.authorName AS name
+FROM `proposed` AS prop
+WHERE
+    prop.target = $target
+    AND prop.type = "proposal"
+    AND prop.status = "approved"
+ORDER BY prop.closed DESC
+LIMIT $limit

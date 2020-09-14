@@ -1,0 +1,11 @@
+-- used by: server/n1ql/documents/get_game_list.n1ql
+CREATE INDEX `game-list` ON `published`(type, title ASC) WHERE type="game";
+
+-- used by: server/n1ql/documents/get_char_list.n1ql
+CREATE INDEX `game-char-list` ON `published`(game, title ASC) WHERE type="character";
+
+-- used by: server/n1ql/documents/get_move_list.n1ql
+CREATE INDEX `char-move-list` ON `published`(character, title ASC) WHERE type="move";
+
+-- used by: server/n1ql/tagsets/update_game_moves.n1ql
+CREATE INDEX `tagset-game-char-list` ON `published`(game) WHERE type="tagset";

@@ -1,0 +1,10 @@
+SELECT
+    $id AS id,
+    game.title,
+    game.type,
+    game.media,
+    game.attributes,
+    game.latestAuthors,
+    game.tags
+FROM `published` AS game
+USE KEYS["game::" || $id]

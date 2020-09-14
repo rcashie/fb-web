@@ -1,0 +1,10 @@
+UPSERT INTO `published` (KEY k, VALUE v)
+SELECT RAW {
+    "k": "tset::game::" || $id,
+    "v": {
+        "type": "tagset",
+        "tags": ARRAY_CONCAT([game.title], game.tags)
+    }
+}
+FROM `published` AS game
+USE KEYS ["game::" || $id]

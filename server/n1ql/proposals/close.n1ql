@@ -1,0 +1,11 @@
+UPDATE `proposed` prop
+USE KEYS ["prop::" || $target || "::" || $version]
+SET
+    prop.status = $newStatus,
+    prop.closed = CEIL(NOW_MILLIS() / 1000)
+WHERE
+    status = "pending"
+RETURNING RAW {
+    "id": $target,
+    "version": $version
+}

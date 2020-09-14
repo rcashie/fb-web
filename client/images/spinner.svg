@@ -1,0 +1,15 @@
+<svg width="38" height="38" viewBox="0 0 38 38" 
+    xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="a">
+            <stop stop-color="#ec576b" offset="0%"/>
+            <stop stop-color="#4ec5c1" offset="50%"/>
+            <stop stop-color="#f6b44c" offset="100%"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd" transform="translate(19, 19)">
+        <circle fill="none" cx="0" cy="0" stroke="url(#a)" r="14" stroke-width="3">
+            <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="0.9s" repeatCount="indefinite" />
+        </circle>
+    </g>
+</svg>

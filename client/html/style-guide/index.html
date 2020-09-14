@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>framebastard Style Guide</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet"> 
+    <style>
+        :root {
+            --color-game: #ffbd38;
+            --color-move: #ff9875;
+            --color-char: #b3ecff;
+            --color-page-alt: #f0f0f0;
+            --color-border: #cfcfcf;
+
+            --space-small: 0.2rem;
+            --space-medium: 0.5rem;
+            --space-large: 0.8rem;
+
+            --radius-small: 0.2rem;
+            --radius-medium: 0.5rem;
+
+            --line-height-small: 0.9rem;
+            --line-height-medium: 1.8rem;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 0.8rem;
+            line-height: var(--line-height-medium);
+        }
+
+        .link {
+            text-decoration: none;
+            font-weight: 500;
+            color: var(--color-move);
+        }
+
+        .link:hover { text-decoration: underline; }
+
+        .doc {
+            margin: var(--space-large) auto;
+            max-width: 30rem;
+            padding: var(--space-medium);
+        }
+
+        .doc__main {
+            display: flex;
+            flex-flow: row wrap;
+            margin: var(--space-small) 0;
+        }
+
+        .doc__main__child { flex-grow: 1; }
+
+        /* Nav */
+        .nav {
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+        .nav__item { 
+            display: flex;
+            flex-flow: row nowrap;
+            flex-grow: 1;
+            height: 1.6rem;
+            margin-bottom: var(--space-small);
+        }
+
+        .nav__item a { 
+            flex-grow: 1;
+            margin-left: var(--space-small);
+            font-weight: 500;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav__item svg {
+            height: 100%;
+            padding-right: var(--space-medium);
+        }
+
+        .nav__item--start { border-top-left-radius: var(--radius-medium); }
+
+        /* Game */
+        .game { background-color: var(--color-game); }
+
+        .game use { fill: var(--color-game); }
+
+        .game svg { background-color: var(--color-char); }
+
+        /* Char */
+        .char { background-color: var(--color-char); }
+
+        .char use { fill: var(--color-char); }
+
+        .char svg { background-color: var(--color-move); }
+
+        /* Move */
+        .move { background-color: var(--color-move); }
+
+        .card {
+            box-shadow: 1px 1px var(--space-medium) var(--color-border);
+            border-radius: var(--radius-medium);
+        }
+
+        /* Preview */
+        .preview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--color-page-alt);
+        }
+
+        .preview__content {
+            width: 8rem;
+            height: 6rem;
+        }
+
+        .preview__content img {
+            display: block;
+            height: auto;
+            width: auto;
+            max-height:100%;
+            max-width: 100%;
+            margin: 0 auto;
+            border-radius: var(--radius-small);
+        }
+
+        .data-set {
+            display: flex;
+            flex-flow: column nowrap;
+            white-space: nowrap;
+            line-height: var(--line-height-small);
+        }
+
+        .data-set__item {
+            border-color: var(--color-page-alt);
+            border-bottom-style: solid;
+            border-width: var(--space-small);
+            display: flex;
+            flex-flow: row nowrap;
+            margin: var(--space-small) var(--space-medium);
+            padding: var(--space-small) 0;
+        }
+
+        .data-set__item__value {
+            flex-grow: 1;
+            text-align: right;
+        }
+
+        /* These are not apart of the style guide */
+        section { 
+            margin: 2rem 0;
+            padding: var(--space-medium);
+            border-radius: var(--radius-medium);
+        }
+
+        .color-example { 
+            padding: var(--space-medium);
+            display: inline-block;
+            border-radius: var(--radius-small);
+        }
+
+    </style>
+</head>
+<body>
+    <svg style="display: none;" width="60" height="100" xmlns="http://www.w3.org/2000/svg">
+        <style>
+            .inherit-colors { fill: inherit; }
+        </style>
+        <symbol id="nav-shit">
+            <path class="inherit-colors" d="M0 0 V100 L60 50"/>
+        </symbol>
+    </svg>
+
+    <header>
+        <h1>framebastard Style Guide</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Overall tone</h2>
+            <p>Serious about frame data in the way it is maintained, accessed and presented. Provide a vibrant and energetic experience as users interact with the site. Whimsical in nature when communicating.</p>
+        </section>
+
+        <section>
+            <h2>Typography</h2>
+            <p>Clear and easy to read under heavy text loads yet energetic.</p>
+            <p>All text is in <a class="link" href="https://fonts.google.com/specimen/Montserrat">Montserrat</a></p>
+        </section>
+        <h1>Heading 1</h1>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <h4>Heading 4</h4>
+        <h5>Heading 5</h5>
+
+        <section>
+            <h2>Colors</h2>
+            <p>Vibrant and energetic. Each color represents a high-level document; a Game, Character or Move.</p>
+            <div class="color-example game">Game</div>
+            <div class="color-example char">Character</div>
+            <div class="color-example move">Move</div>
+            <div class="color-example" style="background-color: var(--color-page-alt)">Alternative</div>
+        </section>
+
+        <section>
+            <h2>Components</h2>
+            <p> Components should be simple, clear and most importantly responsive.</p>
+            <div class="doc card">
+                <div class="nav">
+                    <span class="nav__item nav__item--start game">
+                        <a href="#">Street Fighter 2</a>
+                        <svg preserveAspectRatio="none" viewBox="0 0 60 100"><use xlink:href="#nav-shit"/></svg>
+                    </span>
+                    <span class="nav__item char">
+                        <a href="#">Dhalsim</a>
+                        <svg preserveAspectRatio="none" viewBox="0 0 60 100"><use xlink:href="#nav-shit"/></svg>
+                    </span>
+                    <span class="nav__item move">
+                        <a href="#">Yoga Flame</a>
+                    </span>
+                </div>
+
+                <div class="doc__main">
+                    <div class="doc__main__child preview">
+                        <div class="preview__content">
+                            <img width="640" height="480" src="../images/placeholder.jpg">
+                        </div>
+                    </div>
+
+                    <div class="doc__main__child data-set">
+                        <div class="data-set__item">
+                            On Block <span class="data-set__item__value">+10</span>
+                        </div>
+                        <div class="data-set__item">
+                            On Hit <span class="data-set__item__value">+10</span>
+                        </div>
+                        <div class="data-set__item">
+                            Start up <span class="data-set__item__value">10</span>
+                        </div>
+                        <div class="data-set__item">
+                            Recovery <span class="data-set__item__value">10</span>
+                        </div>
+                    </div>
+
+                    <div class="doc__main__child data-set">
+                        <div class="data-set__item">
+                            On Block <span class="data-set__item__value">+10</span>
+                        </div>
+                        <div class="data-set__item">
+                            On Hit <span class="data-set__item__value">+10</span>
+                        </div>
+                        <div class="data-set__item">
+                            Start up <span class="data-set__item__value">10</span>
+                        </div>
+                        <div class="data-set__item">
+                            Recovery <span class="data-set__item__value">10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

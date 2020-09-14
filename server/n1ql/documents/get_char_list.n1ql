@@ -1,0 +1,26 @@
+SELECT RAW {
+    "totalCount": (
+        SELECT RAW COUNT(*)
+        FROM `published`
+        WHERE
+            type = "character"
+            AND game = $game_id
+    )[0],
+    "page": (
+        SELECT
+            SUBSTR(meta(`char`).id, 6) AS id,
+            char.title,
+            char.type,
+            char.media,
+            IFMISSING(char.attributes[0:3], char.attributes) AS attributes,
+            { "id": char.game, "title": game.title } AS game
+        FROM `published` AS char
+        JOIN `published` AS game ON KEYS["game::" || char.game]
+        WHERE
+            char.type = "character"
+            AND char.game = $game_id
+        ORDER BY char.title
+        OFFSET $offset
+        LIMIT $limit
+    )
+}

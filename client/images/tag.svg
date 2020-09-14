@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+<svg viewBox="0 0 128 128" 
+    xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>.cls-1{fill:#dddddd;}</style>
+    </defs>
+    <path class="cls-1" d="M106.49,21.51,68.91,16,16,68.91,59.09,112,112,59.09ZM96.2,40.42a6.09,6.09,0,1,1,0-8.62A6.09,6.09,0,0,1,96.2,40.42Z"/>
+</svg>

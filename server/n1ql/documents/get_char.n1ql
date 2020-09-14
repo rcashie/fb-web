@@ -1,0 +1,12 @@
+SELECT
+    $id AS id,
+    char.title,
+    char.type,
+    char.media,
+    char.attributes,
+    char.latestAuthors,
+    char.tags,
+    { "id": char.game, "title": game.title } AS game
+FROM `published` AS char
+USE KEYS["char::" || $id]
+JOIN `published` AS game ON KEYS["game::" || char.game]

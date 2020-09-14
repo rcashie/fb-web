@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+    <style>
+        .line {
+            stroke-linecap: round;
+            stroke: #202020;
+            stroke-width: 10;
+        }
+    </style>
+    <line x1="30" x2="70" y1="30" y2="70" class="line"/>
+    <line x1="30" x2="70" y1="70" y2="30" class="line"/>
+</svg>

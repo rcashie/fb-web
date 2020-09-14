@@ -1,0 +1,49 @@
+SELECT RAW {
+    "totalCount": (
+        SELECT RAW COUNT(*)
+        FROM `proposed`
+        WHERE
+            type = "proposal"
+            AND status = $status
+            AND authorId = $authorId
+    )[0],
+    "page": (
+        SELECT
+            {
+                prop.document.title,
+                prop.document.type,
+                "game": (
+                    CASE
+                        WHEN prop.document.type = "character" THEN (
+                            { "id": `char-game`.game, "title": `char-game`.title }
+                        )
+                        WHEN prop.document.type = "move" THEN (
+                            { "id": `move-char`.game, "title": `move-game`.title }
+                        )
+                        ELSE ( {} )
+                    END
+                ),
+                "character": { "id": prop.document.character, "title": `move-char`.title }
+            } AS document,
+            SPLIT(meta(`prop`).id, "::")[1] AS id,
+            SPLIT(meta(`prop`).id, "::")[2] AS version,
+            prop.target,
+            prop.created,
+            prop.lastUpdated,
+            prop.closed,
+            prop.status,
+            prop.authorId,
+            prop.authorName
+        FROM `proposed`AS  prop
+        LEFT OUTER JOIN `published` AS `char-game` ON KEYS["game::" || prop.document.game]
+        LEFT OUTER JOIN `published` AS `move-char` ON KEYS["char::" || prop.document.character]
+        LEFT OUTER JOIN `published` AS `move-game` ON KEYS["game::" || `move-char`.game]
+        WHERE
+            prop.type = "proposal"
+            AND prop.status = $status
+            AND prop.authorId = $authorId
+        ORDER BY prop.created ASC
+        OFFSET $offset
+        LIMIT $limit
+    )
+}

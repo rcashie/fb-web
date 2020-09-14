@@ -1,0 +1,5 @@
+imports_layout = "Vertical"
+merge_imports = true
+wrap_comments = true
+blank_lines_upper_bound = 1
+force_multiline_blocks = true
