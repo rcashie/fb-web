@@ -25,6 +25,38 @@
                     "dynamic": false,
                     "enabled": true,
                     "properties": {
+                        "character": {
+                            "enabled": true,
+                            "dynamic": false,
+                            "fields": [
+                                {
+                                    "name": "character",
+                                    "type": "text",
+                                    "analyzer": "keyword",
+                                    "store": false,
+                                    "index": true,
+                                    "include_term_vectors": false,
+                                    "include_in_all": false,
+                                    "docvalues": false
+                                }
+                            ]
+                        },
+                        "game": {
+                            "enabled": true,
+                            "dynamic": false,
+                            "fields": [
+                                {
+                                    "name": "game",
+                                    "type": "text",
+                                    "analyzer": "keyword",
+                                    "store": false,
+                                    "index": true,
+                                    "include_term_vectors": false,
+                                    "include_in_all": false,
+                                    "docvalues": false
+                                }
+                            ]
+                        },
                         "parentTags": {
                             "enabled": true,
                             "dynamic": false,
