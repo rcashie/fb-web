@@ -106,6 +106,10 @@ class MoveDocumentPage extends PolymerElement {
         this.$.hiddenSections.set('content');
 
         let ajax = this.$.ajax;
+        if (ajax.lastRequest) {
+            ajax.lastRequest.abort();
+        }
+
         ajax.url = `/doc-api/v1/docs/moves/${newValue}`;
         ajax.generateRequest();
     }

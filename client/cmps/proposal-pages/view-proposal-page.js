@@ -265,6 +265,10 @@ class ViewProposalPage extends PolymerElement {
         });
 
         let ajax = this.$.getAjax;
+        if (ajax.lastRequest) {
+            ajax.lastRequest.abort();
+        }
+
         ajax.url = `/doc-api/v1/props/any/${matches[1]}/${matches[2]}`;
         ajax.generateRequest();
 
@@ -310,6 +314,10 @@ class ViewProposalPage extends PolymerElement {
         this._actionsDisabled = true;
 
         let ajax = this.$.patchAjax;
+        if (ajax.lastRequest) {
+            ajax.lastRequest.abort();
+        }
+
         ajax.url = `/doc-api/v1/props/any/${this._proposal.target}/${this._version}/status/${status}`;
         ajax.generateRequest();
     }

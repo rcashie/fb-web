@@ -21,17 +21,13 @@ class SearchPage extends PolymerElement {
                     height: auto;
                     padding: var(--space-medium) var(--space-large);
                 }
-
-                .search {
-                    max-width: calc(var(--page-max-width) * 0.60);
-                    width: 100%;
-                }
             </style>
 
             <div class="app__section search-container">
                 <search-input
-                    class="search"
                     value="[[_query]]"
+                    prefix="[[_target]]"
+                    placeholder="[[_getPlaceholder(_targetType)]]"
                     on-invoke-search="_searchInvoked"
                 >
                 </search-input>
@@ -39,6 +35,8 @@ class SearchPage extends PolymerElement {
 
             <search-results-loader
                 query="[[_query]]"
+                target="[[_target]]"
+                target-type="[[_targetType]]"
                 page="[[_page]]"
             >
             </search-results-loader>
@@ -53,7 +51,7 @@ class SearchPage extends PolymerElement {
         return {
             queryParams: {
                 type: Object,
-                observer: '_onQueryParamsChanged'
+                observer: '_onQueryParamsChanged',
             },
 
             _query: {
@@ -64,19 +62,55 @@ class SearchPage extends PolymerElement {
             _page: {
                 type: Number,
                 value: 1,
+            },
+
+            _target: {
+                type: String,
+                value: null,
+            },
+
+            _targetType: {
+                type: String,
+                value: null,
             }
         };
     }
 
     _searchInvoked(event) {
-        window.history.pushState({}, null, `/search?query=${event.detail}`);
+        let path = `/search?query=${event.detail}`;
+        if (this._target) {
+            path += `&${this._targetType}=${this._target}`;
+        }
+
+        window.history.pushState({}, null, path);
         window.dispatchEvent(new CustomEvent('location-changed'));
     }
 
+    _getPlaceholder(targetType) {
+        // TODO: Make these strings localizable
+        const placeholders = {
+            game: 'Search this game\'s characters and moves',
+            char: 'Search this character\'s moves',
+            none: 'Search games, characters and moves',
+        };
+
+        return placeholders[targetType || 'none'];
+    }
+
     _onQueryParamsChanged(newParams) {
+        let targetType, target;
+        ['game', 'char'].forEach(type => {
+            if (newParams[type]) {
+                targetType = type;
+                target = newParams[type];
+            }
+        });
+
         this.setProperties({
             _query: decodeURI(newParams.query || ''),
             _page: parseInt(newParams.page) || 1,
+            _targetType: targetType,
+            _target: target,
         });
 
         // TODO: Make this string localizable
