@@ -231,6 +231,10 @@ class NewGamePage extends PolymerElement {
         const target = newParams.target;
         if (target) {
             let ajax = this.$.getAjax;
+            if (ajax.lastRequest) {
+                ajax.lastRequest.abort();
+            }
+
             ajax.url = `/doc-api/v1/docs/games/${decodeURI(target)}`;
             ajax.generateRequest();
             section = 'stencil';
@@ -277,6 +281,10 @@ class NewGamePage extends PolymerElement {
         }
 
         let ajax = this.$.postAjax;
+        if (ajax.lastRequest) {
+            ajax.lastRequest.abort();
+        }
+
         ajax.body = {
             target: this._id,
             document: {

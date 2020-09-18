@@ -1,0 +1,67 @@
+SELECT
+    SUBSTR(meta(`doc`).id, 6) AS id,
+    doc.title,
+    doc.type,
+    doc.media,
+    IFMISSING(doc.attributes[0:3], doc.attributes) AS attributes,
+    doc.latestAuthors,
+    CASE
+        WHEN doc.type = "character" THEN (
+            { "id": doc.game, "title": `char-game`.title }
+        )
+        WHEN doc.type = "move" THEN (
+            { "id": `move-char`.game, "title": `move-game`.title }
+        )
+        ELSE ( {} )
+    END As game,
+    { "id": `doc`.character, "title": `move-char`.title } AS character,
+    search_meta(`tagset`).locations AS matches,
+    tagset.tags,
+    tagset.parentTags
+FROM `published` AS tagset
+JOIN `published` AS doc ON KEYS[SUBSTR(meta(`tagset`).id, 6)]
+LEFT OUTER JOIN `published` AS `char-game` ON KEYS["game::" || `doc`.game]
+LEFT OUTER JOIN `published` AS `move-char` ON KEYS["char::" || `doc`.character]
+LEFT OUTER JOIN `published` AS `move-game` ON KEYS["game::" || `move-char`.game]
+WHERE SEARCH(
+    tagset,
+    {
+        "query": {
+            "should": {
+                "disjuncts": [
+                    {
+                        "field": "tags",
+                        "match": $searchTerm,
+                        "boost": 1000
+                    },
+                    {
+                        "field": "parentTags",
+                        "match": $searchTerm,
+                        "boost": 100
+                    },
+                    {
+                        "field": "tags",
+                        "match": $searchTerm,
+                        "fuzziness": 2,
+                        "prefix_length": 2,
+                        "boost": 10
+                    },
+                    {
+                        "field": "parentTags",
+                        "match": $searchTerm,
+                        "prefix_length": 2,
+                        "fuzziness": 2
+                    }
+                ],
+                "min": 1
+            }
+        },
+        "fields": ["tags", "parentTags"],
+        "highlight": {},
+        "sort": ["-_score"],
+        "from": $offset,
+        "size": $limit
+    },
+    { "index": "tagset" }
+)
+AND tagset.type == "tagset"

@@ -237,6 +237,10 @@ class NewCharacterPage extends PolymerElement {
         const target = newParams.target;
         if (target) {
             let ajax = this.$.getAjax;
+            if (ajax.lastRequest) {
+                ajax.lastRequest.abort();
+            }
+
             ajax.url = `/doc-api/v1/docs/chars/${decodeURI(target)}`;
             ajax.generateRequest();
             section = 'stencil';
@@ -292,6 +296,10 @@ class NewCharacterPage extends PolymerElement {
         }
 
         let ajax = this.$.postAjax;
+        if (ajax.lastRequest) {
+            ajax.lastRequest.abort();
+        }
+
         ajax.body = {
             target: `${this._getIdPrefix(this.queryParams)}${this._id}`,
             document: {

@@ -140,6 +140,16 @@ class SearchResultsLoader extends PolymerElement {
                 value: ''
             },
 
+            target: {
+                type: String,
+                value: null
+            },
+
+            targetType: {
+                type: String,
+                value: null
+            },
+
             page: {
                 type: Number,
                 value: 1
@@ -179,12 +189,16 @@ class SearchResultsLoader extends PolymerElement {
 
     static get observers() {
         return [
-            '_onParamsChanged(query, page, pageSize)'
+            '_onParamsChanged(query, target, targetType, page, pageSize)'
         ];
     }
 
-    _onParamsChanged(query, page, pageSize) {
-        const newValue = query && query.trim();
+    _onParamsChanged(query, target, targetType, page, pageSize) {
+        const newQuery = query && query.trim() || '';
+        if (newQuery.length === 0) {
+            return;
+        }
+
         this.setProperties({
             _documents: [],
             _showStencil: true,
@@ -199,10 +213,14 @@ class SearchResultsLoader extends PolymerElement {
         }
 
         ajax.params = {
-            query: newValue,
+            query: newQuery,
             limit: pageSize + 1,
             offset: pageSize * (page - 1)
         };
+
+        if (target) {
+            ajax.params[targetType] = target;
+        }
 
         ajax.generateRequest();
         this.$.loadError.hide();

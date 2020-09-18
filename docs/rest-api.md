@@ -58,27 +58,25 @@ Getting lists of proposals (Method: GET)
 ```
 
 ## Searching
-Method: GET
 
-Search across all documents
+Search across all documents (Method: GET)
 ```
 /search-api/v1?query=x&limit=y&offset=z
 ```
 
-Search all documents that are in game 'z' (Not implemented)
+Search all documents that are in game 'z' (Method: GET)
 ```
 /search-api/v1?query=x&game=z
 ```
 
-Search all documents that are in char 'z' (Not implemented)
+Search all documents that are in char 'z' (Method: GET)
 ```
 /search-api/v1?query=x&char=z
 ```
 
 ## Uploads
-Method: POST
 
-Upload a video file. The resulting file is placed in the [configured](../server/config.json.sample) 'uploads' folder.
+Upload a video file. The resulting file is placed in the [configured](../server/config.json.sample) 'uploads' folder. (Method: POST)
 ```
 /upload-api/v1
 ```

@@ -27,6 +27,14 @@ WHERE SEARCH(
     tagset,
     {
         "query": {
+            "must": {
+                "conjuncts": [
+                    {
+                        "term": $target,
+                        "field": $targetType
+                    }
+                ]
+            },
             "should": {
                 "disjuncts": [
                     {
@@ -52,7 +60,8 @@ WHERE SEARCH(
                         "prefix_length": 2,
                         "fuzziness": 2
                     }
-                ]
+                ],
+                "min": 1
             }
         },
         "fields": ["tags", "parentTags"],

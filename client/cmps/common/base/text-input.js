@@ -77,6 +77,7 @@ class TextInput extends PolymerElement {
                 </label>
 
                 <div class\$="app__container app__bordered text-box text-box--[[_getValidString(valid)]]">
+                    <!-- Extra div required for vertically centering the prefix on IOS devices -->
                     <div
                         class="text-box__prefix-container"
                         hidden="[[!prefix]]"

@@ -81,6 +81,7 @@ class DocumentInfo extends PolymerElement {
                 }
             </style>
 
+            <!-- Stencil -->
             <div hidden="[[!showStencil]]">
                 <div class="stencil__header">
                 </div>

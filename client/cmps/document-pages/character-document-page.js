@@ -1,5 +1,6 @@
 import '../common/base/boolean-filter.js';
 import '../common/base/page-message.js';
+import '../common/search/search-input.js';
 import '../common/document/document-list-loader.js';
 import '../common/styles/app-styles.js';
 import './common/document-info.js';
@@ -15,6 +16,14 @@ class CharacterDocumentPage extends PolymerElement {
             <style>
                 :host {
                     display: block;
+                }
+
+                .search-container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: auto;
+                    padding: var(--space-medium) var(--space-large);
                 }
             </style>
 
@@ -57,6 +66,15 @@ class CharacterDocumentPage extends PolymerElement {
                     a move
                 </span>
             </document-info>
+
+            <!-- TODO: Make placeholder string localizable -->
+            <div class="app__section search-container">
+                <search-input
+                    placeholder="Search this character's moves"
+                    on-invoke-search="_searchInvoked"
+                >
+                </search-input>
+            </div>
 
             <!-- TODO: Make header string localizable -->
             <document-list-loader
@@ -132,6 +150,10 @@ class CharacterDocumentPage extends PolymerElement {
         this.$.hiddenSections.set('content');
 
         let ajax = this.$.ajax;
+        if (ajax.lastRequest) {
+            ajax.lastRequest.abort();
+        }
+
         ajax.url = `/doc-api/v1/docs/chars/${newValue}`;
         ajax.generateRequest();
     }
@@ -146,6 +168,11 @@ class CharacterDocumentPage extends PolymerElement {
             ? 'notFound' : 'error';
 
         this.$.hiddenSections.set(section);
+    }
+
+    _searchInvoked(event) {
+        window.history.pushState({}, null, `/search?query=${event.detail}&char=${this.documentId}`);
+        window.dispatchEvent(new CustomEvent('location-changed'));
     }
 
     _setDocumentTitle(doc) {

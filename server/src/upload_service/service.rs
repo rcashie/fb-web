@@ -67,7 +67,7 @@ impl Service {
             }
         };
 
-        // Make sure the uploaded file is within the limit.
+        // Make sure the uploaded file is within the size limit.
         let length = Self::get_content_length(&header_map)?;
         if length > self.config.video_size_limit() {
             warn!(
@@ -75,7 +75,7 @@ impl Service {
                 user_name, user_id, length
             );
 
-            HttpError::BadRequest("File is too big".into());
+            return Err(HttpError::BadRequest("File is too big".into()));
         }
 
         info!(

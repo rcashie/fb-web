@@ -42,19 +42,29 @@ impl Service {
         let query_params = http_util::parse_query_string(query.unwrap_or(""));
 
         // Extract the query string itself
-        let query_string = query_params
+        let search_term = query_params
             .get("query")
             .ok_or_else(|| HttpError::BadRequest("Invalid or missing query parameter".into()))?;
 
-        // Extract paging options
+        // Extract query options
+        let game = query_params.get("game").map(|v| *v);
+        let character = query_params.get("char").map(|v| *v);
         let (offset, limit) = http_util::get_paging_options(&query_params)
             .map_err(|message| HttpError::BadRequest(message.into()))?;
 
-        // Perform the search
-        let result = self
-            .adapter
-            .execute_search(query_string, offset, limit)
-            .await;
+        let result = match (game, character) {
+            (Some(target), None) => {
+                self.adapter
+                    .search_game(target, search_term, offset, limit)
+                    .await
+            }
+            (None, Some(target)) => {
+                self.adapter
+                    .search_character(target, search_term, offset, limit)
+                    .await
+            }
+            _ => self.adapter.search_all(search_term, offset, limit).await,
+        };
 
         database_adapters::build_http_result(result)
     }

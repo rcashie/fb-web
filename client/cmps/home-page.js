@@ -31,16 +31,12 @@ class HomePage extends PolymerElement {
                         padding: 0 var(--space-large) var(--space-medium) var(--space-large);
                     }
                 }
-
-                .search {
-                    max-width: calc(var(--page-max-width) * 0.60);
-                    width: 100%;
-                }
             </style>
 
             <div class="app__section search-container">
+                <!-- TODO: Make the placeholder string localizable -->
                 <search-input
-                    class="search"
+                    placeholder="Search games, characters and moves"
                     on-invoke-search="_searchInvoked"
                 >
                 </search-input>

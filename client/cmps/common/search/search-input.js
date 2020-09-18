@@ -8,6 +8,11 @@ class SearchInput extends PolymerElement {
             </style>
 
             <style>
+                :host {
+                    max-width: calc(var(--page-max-width) * 0.60);
+                    width: 100%;
+                }
+
                 .search {
                     display: flex;
                     flex-flow: row nowrap;
@@ -19,6 +24,21 @@ class SearchInput extends PolymerElement {
                 .search__icon {
                     width: 1rem;
                     height: 1rem;
+                }
+
+                .search__prefix-container:not([hidden]) {
+                    display: flex;
+                    align-items: center;
+                    background-color: var(--color-page-alt);
+                    border-style: none solid none none;
+                    padding: var(--space-medium);
+                    overflow: hidden;
+                }
+
+                .search__prefix {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                 }
 
                 .search__input {
@@ -47,22 +67,33 @@ class SearchInput extends PolymerElement {
                     cursor: pointer;
                     padding: 0 var(--space-large);
                     border: none;
-                    background-color: var(--color-page-alt);
+                    background-color: var(--color-button-action);
                 }
 
                 .search__button[disabled] {
                     cursor: default;
+                    background-color: var(--color-disabled-button-action);
                 }
             </style>
 
             <div class="app__bordered app__container search">
-                <!-- TODO: Make these strings localizable -->
+
+                <!-- Extra div required for vertically centering the prefix on IOS devices -->
+                <div
+                    class="app__bordered search__prefix-container"
+                    hidden="[[!prefix]]"
+                >
+                    <span class="search__prefix">
+                        [[prefix]] :
+                    </span>
+                </div>
+
                 <input
                     class="search__input"
                     type="text"
                     value="{{value::input}}"
-                    aria-label="Search games, characters and moves"
-                    placeholder="Search games, characters and moves"
+                    aria-label="[[placeholder]]"
+                    placeholder="[[placeholder]]"
                     on-keydown="_onKeyDowned"
                 >
 
@@ -90,6 +121,16 @@ class SearchInput extends PolymerElement {
             value: {
                 type: String,
                 value: '',
+            },
+
+            placeholder: {
+                type: String,
+                value: '',
+            },
+
+            prefix: {
+                type: String,
+                value: null,
             }
         };
     }
