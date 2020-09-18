@@ -15,12 +15,12 @@ framebastard uses [Couchbase](https://www.couchbase.com/) to store and query doc
 
 2. To initialize your cluster run [setup.sh](couchbase/setup.sh) for a locally installed cluster:
     ```sh
-    ./setup.sh --user <username> --password <password>
+    ./setup.sh --user <username> --password <password> --create-bkt-indices --create-fts-indices
     ```
 
     or [setup_docker.sh](couchbase/setup_docker.sh) for a cluster running in a Docker container:
     ```sh
-    ./setup_docker.sh --container <container id/name> --user <username> --password <password>
+    ./setup_docker.sh --container <container id/name> --user <username> --password <password> --create-bkt-indices --create-fts-indices
     ```
 
     See [setup.sh](couchbase/setup.sh) for a full list of parameters.

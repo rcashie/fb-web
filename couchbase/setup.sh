@@ -12,8 +12,10 @@ cluster=127.0.0.1
 ftsRamSize=2048
 dataRamSize=2048
 indexRamSize=2048
-publishedRamSize=1024
-proposedRamSize=1024
+bktPublishedRamSize=1024
+bktProposedRamSize=1024
+createBktIndices=0
+createFtsIndices=0
 
 # Process arguments
 while [ $# -gt 0 ]; do
@@ -24,8 +26,10 @@ while [ $# -gt 0 ]; do
         --fts-ram-size) ftsRamSize=$2; shift ;;
         --data-ram-size) dataRamSize=$2; shift ;;
         --index-ram-size) indexRamSize=$2; shift ;;
-        --published-ram-size) publishedRamSize=$2; shift ;;
-        --proposed-ram-size) proposedRamSize=$2; shift ;;
+        --bkt-published-ram-size) bktPublishedRamSize=$2; shift ;;
+        --bkt-proposed-ram-size) bktProposedRamSize=$2; shift ;;
+        --create-bkt-indices) createBktIndices=1 ;;
+        --create-fts-indices) createFtsIndices=1 ;;
         *) showInvalidOption "$1" ;;
     esac
     shift
@@ -110,15 +114,15 @@ setupBuckets() {
         fi
     }
 
-    createBucket "published" "$publishedRamSize"
-    createBucket "proposed" "$proposedRamSize"
+    createBucket "published" "$bktPublishedRamSize"
+    createBucket "proposed" "$bktProposedRamSize"
 }
 
-setFtsIndex() {
+createFtsIndices() {
 
-    printInfo "Setting FTS index..."
+    printInfo "Setting FTS indices..."
 
-    # Delete any existing indicies
+    # Delete any existing indices
     status=$(curl -s \
         -X DELETE \
         -w "%{http_code}" \
@@ -154,7 +158,7 @@ setFtsIndex() {
     printInfo "Done."
 }
 
-applyIndicies() {
+createBucketIndices() {
     printInfo "Getting existing indices..."
     query="SELECT RAW (\"\`\" || keyspace_id || \"\`.\`\" || name || \"\`\") FROM system:indexes WHERE name != \"tagset\""
     result=$(runQueryScript "$query")
@@ -211,5 +215,11 @@ fi
 
 initializeCluster
 setupBuckets
-setFtsIndex
-applyIndicies
+
+if [ "$createFtsIndices" -eq 1 ]; then
+    createFtsIndices
+fi
+
+if [ "$createBktIndices" -eq 1 ]; then
+    createBucketIndices
+fi
