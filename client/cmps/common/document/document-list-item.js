@@ -16,6 +16,7 @@ class DocumentListItem extends PolymerElement {
                 }
 
                 mark {
+                    color: inherit;
                     background-color: var(--color-sentiment-positive);
                 }
 
@@ -54,6 +55,7 @@ class DocumentListItem extends PolymerElement {
                     align-content: center;
                     border-style: dashed none none none;
                     font-size: var(--font-size-small);
+                    color: var(--color-text-note);
                 }
 
                 .list-item__match {
@@ -72,19 +74,13 @@ class DocumentListItem extends PolymerElement {
 
                 <div class="list-item__body">
                     <section class="list-item__content">
-                        <template
-                            is="dom-if"
-                            if="[[document.media.fileName]]"
-                            restamp
+                        <document-media
+                            class="list-item__media"
+                            theme="small"
+                            file-name="[[document.media.fileName]]"
+                            preview-data="[[document.media.previewData]]"
                         >
-                            <document-media
-                                class="list-item__media"
-                                theme="small"
-                                file-name="[[document.media.fileName]]"
-                                preview-data="[[document.media.previewData]]"
-                            >
-                            </document-media>
-                        </template>
+                        </document-media>
 
                         <div class="list-item__attributes">
                             <document-attributes

@@ -4,7 +4,6 @@ SELECT
     doc.type,
     doc.media,
     IFMISSING(doc.attributes[0:3], doc.attributes) AS attributes,
-    doc.latestAuthors,
     CASE
         WHEN doc.type = "character" THEN (
             { "id": doc.game, "title": `char-game`.title }

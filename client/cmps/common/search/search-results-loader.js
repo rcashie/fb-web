@@ -112,14 +112,14 @@ class SearchResultsLoader extends PolymerElement {
                 <footer class="footer">
                     <a
                         class="app__hyperlink app__hyperlink--inline footer__link"
-                        href\$="?query=[[query]]&page=[[_prevPage]]"
+                        href\$="[[_getPagingLink(query, targetType, target, _prevPage)]]"
                         hidden="[[!_prevPage]]"
                     >
                         &larr; Previous
                     </a>
                     <a
                         class="app__hyperlink app__hyperlink--inline footer__link"
-                        href\$="?query=[[query]]&page=[[_nextPage]]"
+                        href\$="[[_getPagingLink(query, targetType, target, _nextPage)]]"
                         hidden="[[!_nextPage]]"
                     >
                         Next &rarr;
@@ -244,6 +244,10 @@ class SearchResultsLoader extends PolymerElement {
         if (!event.detail.request.aborted) {
             this.$.loadError.show();
         }
+    }
+
+    _getPagingLink(query, targetType, target, page) {
+        return `?query=${query}${targetType ? `&${targetType}=${target}` : ''}&page=${page}`;
     }
 }
 
