@@ -286,6 +286,21 @@ class FbApp extends PolymerElement {
             <nav class="footer">
                 <a
                     class="app__hyperlink media-link flex-item"
+                    href="https://github.com/rcashie/fb-web"
+                    target="_blank"
+                >
+                    <img
+                        class="media-link__icon"
+                        src="/static/images/github-icon.svg"
+                        alt=""
+                    />
+
+                    <!-- TODO: Make string localizable -->
+                    Source code
+                </a>
+
+                <a
+                    class="app__hyperlink media-link flex-item"
                     href="https://twitter.com/rcashie"
                     target="_blank"
                 >

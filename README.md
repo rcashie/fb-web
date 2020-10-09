@@ -1,10 +1,11 @@
 # fb-web
-The web server and client app for the framebastard website.
+The web server and client app for the [framebastard](https://framebastard.com) website.
 The server delivers static content and exposes REST apis for retrieving asset data.
 
 * [Setup](#setup)
 * [Building and Running](#building-and-running)
 * [Documents](#documents)
+* [Other Repositories](#other-repositories)
 
 ## Setup
 
@@ -41,7 +42,7 @@ The backend of this app is written in [Rust](https://www.rust-lang.org).
 1. [Install](https://www.rust-lang.org/en-US/install.html) Rust
 
 2. Install the dependencies for building [libcouchbase](https://github.com/couchbase/libcouchbase).
-Although libcouchbase supports `libev-dev`, the Rust library wrapper [does not](https://github.com/couchbaselabs/couchbase-rs/blob/991b6d602f63a4db6ee153ed0d1b7f69142c6a09/couchbase-sys/build.rs#L20).
+We are using `libevent-dev`; although libcouchbase supports `libev-dev` the Rust library wrapper [does not](https://github.com/couchbaselabs/couchbase-rs/blob/991b6d602f63a4db6ee153ed0d1b7f69142c6a09/couchbase-sys/build.rs#L20).
     ```sh
     # For Debian-based distributions
     sudo apt install libssl-dev libevent-dev cmake llvm-dev libclang-dev clang
@@ -76,3 +77,8 @@ Once the application is running you can import data by using the [fb-web-import]
 [Data Schema](docs/data-design.md)
 
 [Rest API](docs/rest-api.md)
+
+## Other Repositories
+[fb-web-import](https://github.com/rcashie/fb-web-import)
+
+[fb-web-deploy](https://github.com/rcashie/fb-web-deploy)
