@@ -17,7 +17,8 @@ class DocumentListItem extends PolymerElement {
 
                 mark {
                     color: inherit;
-                    background-color: var(--color-sentiment-positive);
+                    background-color: inherit;
+                    font-weight: var(--font-weight-bold);
                 }
 
                 .list-item {
@@ -32,11 +33,11 @@ class DocumentListItem extends PolymerElement {
                 .list-item__content {
                     display: flex;
                     flex-flow: row nowrap;
-                    margin-bottom: var(--space-medium);
                 }
 
                 .list-item__media {
                     margin-right: var(--space-large);
+                    flex-shrink: 0;
                 }
 
                 .list-item__attributes {
@@ -44,16 +45,16 @@ class DocumentListItem extends PolymerElement {
                     overflow: hidden;
                 }
 
-                .list-item__attributes-footer {
-                    margin-top: var(--space-medium);
+                .list-item__more {
                     text-align: right;
+                    margin-bottom: var(--space-large)
                 }
 
                 .list-item__match-container:not([hidden]) {
                     display: flex;
-                    flex-flow: row wrap;
+                    flex-flow: column nowrap;
                     align-content: center;
-                    border-style: dashed none none none;
+                    border-style: solid none none none;
                     font-size: var(--font-size-small);
                     color: var(--color-text-note);
                 }
@@ -90,17 +91,19 @@ class DocumentListItem extends PolymerElement {
                             >
                             </document-attributes>
 
-                            <div class="list-item__attributes-footer">
-                                <a
-                                    class="app__hyperlink app__hyperlink--inline"
-                                    href\$="[[_getUrl(document)]]"
-                                >
-                                    <!-- TODO: Make string localizable -->
-                                    more...
-                                </a>
-                            </div>
                         </div>
                     </section>
+
+                    <div class="list-item__more">
+                        <a
+                            class="app__hyperlink app__hyperlink--inline"
+                            href\$="[[_getUrl(document)]]"
+                        >
+                            <!-- TODO: Make string localizable -->
+                            more...
+                        </a>
+                    </div>
+
                     <footer
                         id="matchContainer"
                         class="app__bordered list-item__match-container"
@@ -252,7 +255,7 @@ class DocumentListItem extends PolymerElement {
             document.matches.tags || {}
         );
 
-        const html = parentTags.concat(tags).join('<span class="list-item__match">&#8226</span>');
+        const html = parentTags.concat(tags).join('');
         this.shadowRoot.querySelector('#matchContainer').innerHTML = html;
     }
 
