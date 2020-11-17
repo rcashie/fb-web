@@ -70,7 +70,8 @@ class CharacterDocumentPage extends PolymerElement {
             <!-- TODO: Make placeholder string localizable -->
             <div class="app__section search-container">
                 <search-input
-                    placeholder="Search this character's moves"
+                    class="app__shadowed"
+                    placeholder="Search [[_document.title]]"
                     on-invoke-search="_searchInvoked"
                 >
                 </search-input>

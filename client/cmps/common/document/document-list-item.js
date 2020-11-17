@@ -26,8 +26,12 @@ class DocumentListItem extends PolymerElement {
                     background-color: var(--color-page);
                 }
 
-                .list-item__body {
+                .list-item__header {
                     margin: var(--space-large);
+                }
+
+                .list-item__body {
+                    margin: 0 var(--space-large) var(--space-large);
                 }
 
                 .list-item__content {
@@ -47,7 +51,6 @@ class DocumentListItem extends PolymerElement {
 
                 .list-item__more {
                     text-align: right;
-                    margin-bottom: var(--space-large)
                 }
 
                 .list-item__match-container:not([hidden]) {
@@ -57,6 +60,7 @@ class DocumentListItem extends PolymerElement {
                     border-style: solid none none none;
                     font-size: var(--font-size-small);
                     color: var(--color-text-note);
+                    margin: 0 var(--space-large) var(--space-large);
                 }
 
                 .list-item__match {
@@ -65,7 +69,7 @@ class DocumentListItem extends PolymerElement {
             </style>
 
             <article class="app__container app__bordered app__shadowed list-item">
-                <header>
+                <header class="list-item__header">
                     <document-breadcrumbs
                         document="[[document]]"
                         full-path="[[fullCrumbPath]]"
@@ -103,14 +107,13 @@ class DocumentListItem extends PolymerElement {
                             more...
                         </a>
                     </div>
-
-                    <footer
-                        id="matchContainer"
-                        class="app__bordered list-item__match-container"
-                        hidden="[[!document.matches]]"
-                    >
-                    </footer>
                 </div>
+                <footer
+                    id="matchContainer"
+                    class="app__bordered list-item__match-container"
+                    hidden="[[!document.matches]]"
+                >
+                </footer>
             </article>
         `;
     }
