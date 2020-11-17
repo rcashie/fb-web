@@ -7,7 +7,7 @@ $_documentContainer.innerHTML = `
             .stencil__header {
                 height: 1.6rem; /* from bread-crumb size */
                 background-color: var(--color-page-alt);
-                margin-bottom: var(--space-small);
+                margin-bottom: var(--space-medium);
             }
 
             .stencil__media {
@@ -55,7 +55,6 @@ $_documentContainer.innerHTML = `
             .stencil__attribute {
                 background-color: var(--color-page-alt);
                 height: var(--line-height-small);
-                margin: var(--space-medium);
                 width: 100%;
                 max-width: 15rem;
             }

@@ -23,15 +23,12 @@ class DocumentListItem extends PolymerElement {
 
                 .list-item {
                     overflow: hidden;
+                    padding: var(--space-medium);
                     background-color: var(--color-page);
                 }
 
                 .list-item__header {
-                    margin: var(--space-large);
-                }
-
-                .list-item__body {
-                    margin: var(--space-large);
+                    margin-bottom: var(--space-small);
                 }
 
                 .list-item__content {
@@ -60,12 +57,8 @@ class DocumentListItem extends PolymerElement {
                     border-style: solid none none none;
                     font-size: var(--font-size-small);
                     color: var(--color-text-note);
-                    margin: 0 var(--space-large) var(--space-large);
                 }
 
-                .list-item__match {
-                    margin: var(--space-medium) var(--space-medium) 0 0;
-                }
             </style>
 
             <article class="app__container app__bordered app__shadowed list-item">
@@ -77,37 +70,36 @@ class DocumentListItem extends PolymerElement {
                     </document-breadcrumbs>
                 </header>
 
-                <div class="list-item__body">
-                    <section class="list-item__content">
-                        <document-media
-                            class="list-item__media"
+                <section class="list-item__content">
+                    <document-media
+                        class="list-item__media"
+                        theme="small"
+                        file-name="[[document.media.fileName]]"
+                        preview-data="[[document.media.previewData]]"
+                    >
+                    </document-media>
+
+                    <div class="list-item__attributes">
+                        <document-attributes
+                            max="3"
                             theme="small"
-                            file-name="[[document.media.fileName]]"
-                            preview-data="[[document.media.previewData]]"
+                            attributes="[[document.attributes]]"
                         >
-                        </document-media>
+                        </document-attributes>
 
-                        <div class="list-item__attributes">
-                            <document-attributes
-                                max="3"
-                                theme="small"
-                                attributes="[[document.attributes]]"
-                            >
-                            </document-attributes>
-
-                        </div>
-                    </section>
-
-                    <div class="list-item__more">
-                        <a
-                            class="app__hyperlink app__hyperlink--inline"
-                            href\$="[[_getUrl(document)]]"
-                        >
-                            <!-- TODO: Make string localizable -->
-                            more...
-                        </a>
                     </div>
+                </section>
+
+                <div class="list-item__more">
+                    <a
+                        class="app__hyperlink app__hyperlink--inline"
+                        href\$="[[_getUrl(document)]]"
+                    >
+                        <!-- TODO: Make string localizable -->
+                        more...
+                    </a>
                 </div>
+
                 <footer
                     id="matchContainer"
                     class="app__bordered list-item__match-container"
@@ -235,7 +227,7 @@ class DocumentListItem extends PolymerElement {
         tags.forEach((tag, index) => {
             if (!tagMatchMap[index]) return;
             const marked = DocumentListItem._markTag(tag, index, tagMatchMap);
-            result.push(`<span class="list-item__match">${marked}</span>`);
+            result.push(`<span>${marked}</span>`);
         });
 
         return result;
