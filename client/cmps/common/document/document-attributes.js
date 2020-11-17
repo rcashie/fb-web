@@ -74,13 +74,15 @@ class DocumentAttributes extends PolymerElement {
                 }
 
                 .attribute__title {
+                    flex-shrink: 0;
                     padding: var(--space-small) 0;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                    margin-right: var(--space-small);
                 }
 
                 .attribute__value {
                     padding: var(--space-small) var(--space-medium);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
             </style>
 

@@ -49,6 +49,7 @@ class SearchInput extends PolymerElement {
                     border: none;
                     color: inherit;
                     font: inherit;
+                    letter-spacing: inherit;
                     padding: var(--space-medium) 0 var(--space-medium) var(--space-medium);
                     min-width: 0;
                 }

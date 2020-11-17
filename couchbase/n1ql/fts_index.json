@@ -8,7 +8,20 @@
             "type_field": "type"
         },
         "mapping": {
-            "default_analyzer": "simple",
+            "analysis": {
+                "analyzers": {
+                    "tagset-analyzer": {
+                        "token_filters": [
+                            "stop_en",
+                            "to_lower",
+                            "stemmer_porter"
+                        ],
+                        "tokenizer": "whitespace",
+                        "type": "custom"
+                    }
+                }
+            },
+            "default_analyzer": "tagset-analyzer",
             "default_datetime_parser": "dateTimeOptional",
             "default_field": "_all",
             "default_mapping": {
@@ -30,14 +43,10 @@
                             "dynamic": false,
                             "fields": [
                                 {
-                                    "name": "character",
-                                    "type": "text",
                                     "analyzer": "keyword",
-                                    "store": false,
                                     "index": true,
-                                    "include_term_vectors": false,
-                                    "include_in_all": false,
-                                    "docvalues": false
+                                    "name": "character",
+                                    "type": "text"
                                 }
                             ]
                         },
@@ -46,14 +55,10 @@
                             "dynamic": false,
                             "fields": [
                                 {
-                                    "name": "game",
-                                    "type": "text",
                                     "analyzer": "keyword",
-                                    "store": false,
                                     "index": true,
-                                    "include_term_vectors": false,
-                                    "include_in_all": false,
-                                    "docvalues": false
+                                    "name": "game",
+                                    "type": "text"
                                 }
                             ]
                         },
