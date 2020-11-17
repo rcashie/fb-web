@@ -31,7 +31,7 @@ class DocumentListItem extends PolymerElement {
                 }
 
                 .list-item__body {
-                    margin: 0 var(--space-large) var(--space-large);
+                    margin: var(--space-large);
                 }
 
                 .list-item__content {

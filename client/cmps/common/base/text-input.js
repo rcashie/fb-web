@@ -56,6 +56,7 @@ class TextInput extends PolymerElement {
                     box-shadow: none;
                     color: inherit;
                     font: inherit;
+                    letter-spacing: inherit;
                     width: 100%;
                     box-sizing: border-box;
                     padding: var(--space-small);

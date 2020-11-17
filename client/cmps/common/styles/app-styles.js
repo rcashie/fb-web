@@ -19,6 +19,7 @@ $_documentContainer.innerHTML = `
                 padding: 0;
                 margin: 0;
                 font: inherit;
+                letter-spacing: inherit;
                 border: none;
                 background-color: transparent;
             }
