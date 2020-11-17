@@ -36,10 +36,15 @@ class DocumentList extends PolymerElement {
                     width: 100%;
                 }
 
+                .stencil__list-item {
+                    padding: var(--space-medium);
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+
                 .stencil__body {
                     display: flex;
                     flex-flow: row nowrap;
-                    padding: var(--space-large);
                 }
 
                 .stencil__attribute-container {
@@ -52,37 +57,26 @@ class DocumentList extends PolymerElement {
                 class="list"
                 hidden="[[!showStencil]]"
             >
-                <div class="app__container app__shadowed app__section list__item">
-                    <div class="stencil__header">
-                    </div>
-
-                    <div class="stencil__body">
-                        <div class="stencil__media stencil__media--small">
+                <template
+                    is="dom-repeat"
+                    items="[[_stencilItems]]"
+                >
+                    <div class="app__container app__shadowed app__section stencil__list-item">
+                        <div class="stencil__header">
                         </div>
 
-                        <div class="stencil__attribute-container stencil__attribute-container--small">
-                            <div class="stencil__attribute"></div>
-                            <div class="stencil__attribute"></div>
-                            <div class="stencil__attribute"></div>
+                        <div class="stencil__body">
+                            <div class="stencil__media stencil__media--small">
+                            </div>
+
+                            <div class="stencil__attribute-container stencil__attribute-container--small">
+                                <div class="stencil__attribute"></div>
+                                <div class="stencil__attribute"></div>
+                                <div class="stencil__attribute"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="app__container app__shadowed app__section list__item">
-                    <div class="stencil__header">
-                    </div>
-
-                    <div class="stencil__body">
-                        <div class="stencil__media stencil__media--small">
-                        </div>
-
-                        <div class="stencil__attribute-container stencil__attribute-container--small">
-                            <div class="stencil__attribute"></div>
-                            <div class="stencil__attribute"></div>
-                            <div class="stencil__attribute"></div>
-                        </div>
-                    </div>
-                </div>
+                </template>
             </div>
 
             <div
@@ -123,6 +117,11 @@ class DocumentList extends PolymerElement {
             fullCrumbPath: {
                 type: Boolean,
                 value: false
+            },
+
+            _stencilItems: {
+                type: Array,
+                value: () => [0, 0, 0, 0]
             }
         };
     }

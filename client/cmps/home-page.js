@@ -21,14 +21,13 @@ class HomePage extends PolymerElement {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    padding: 0 var(--space-large);
                 }
 
                 @media (max-width: 25rem) {
                     .search-container {
                         background-image: none;
                         height: auto;
-                        padding: 0 var(--space-large) var(--space-medium) var(--space-large);
+                        padding: 0 var(--space-medium) var(--space-medium);
                     }
                 }
             </style>
