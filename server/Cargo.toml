@@ -8,7 +8,7 @@ edition = "2018"
 async-std = "~1.7"
 base64 = "~0.13"
 bytes = "~0.6"
-couchbase = "1.0.0-alpha.4"
+couchbase = { version = "1.0.0-alpha.4", features  = ["libcouchbase-static"] }
 fern = "~0.6"
 futures = "~0.3"
 hyper = "~0.13"

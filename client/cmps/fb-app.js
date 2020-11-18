@@ -33,7 +33,7 @@ class FbApp extends PolymerElement {
                 .banner {
                     color: var(--color-text-inverse);
                     background-color: var(--color-page-inverse);
-                    padding: var(--space-large);
+                    padding: var(--space-large) var(--space-large) var(--space-small);
                 }
 
                 .banner__content {

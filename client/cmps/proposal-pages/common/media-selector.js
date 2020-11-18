@@ -24,7 +24,7 @@ class MediaSelector extends PolymerElement {
                     display: inline-flex;
                     flex-flow: column nowrap;
                     align-items: center;
-                    padding: var(--space-medium);
+                    padding: var(--space-large);
                 }
 
                 .media-container {

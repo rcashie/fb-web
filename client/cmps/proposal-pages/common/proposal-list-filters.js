@@ -28,6 +28,7 @@ class ProposalListFilters extends PolymerElement {
 
                 .sort-option {
                     padding: 0 var(--space-medium);
+                    margin: 0;
                     border: none;
                     font: inherit;
                     letter-spacing: inherit;

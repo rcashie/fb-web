@@ -23,6 +23,7 @@ class BaseButton extends PolymerElement {
                 .button {
                     cursor: pointer;
                     padding: var(--space-medium) var(--space-large);
+                    margin: 0;
                     font-family: inherit;
                     font-size: var(--font-size-normal);
                     line-height: var(--line-height-small);

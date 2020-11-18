@@ -45,6 +45,7 @@ $_documentContainer.innerHTML = `
 
             .app__bordered {
                 border: var(--border-size) solid var(--color-border);
+                overflow: hidden;
             }
 
             .app__bordered--dashed {

@@ -23,12 +23,17 @@ class DocumentListItem extends PolymerElement {
 
                 .list-item {
                     overflow: hidden;
-                    padding: var(--space-medium);
                     background-color: var(--color-page);
                 }
 
                 .list-item__header {
-                    margin-bottom: var(--space-small);
+                    overflow: hidden;
+                    margin: var(--space-small);
+                    border-radius: var(--border-radius-inner) var(--border-radius-inner) 0 0;
+                }
+
+                .list-item__body {
+                    padding: var(--space-large);
                 }
 
                 .list-item__content {
@@ -54,7 +59,7 @@ class DocumentListItem extends PolymerElement {
                     display: flex;
                     flex-flow: column nowrap;
                     align-content: center;
-                    border-style: solid none none none;
+                    border-style: dashed none none none;
                     font-size: var(--font-size-small);
                     color: var(--color-text-note);
                 }
@@ -70,42 +75,42 @@ class DocumentListItem extends PolymerElement {
                     </document-breadcrumbs>
                 </header>
 
-                <section class="list-item__content">
-                    <document-media
-                        class="list-item__media"
-                        theme="small"
-                        file-name="[[document.media.fileName]]"
-                        preview-data="[[document.media.previewData]]"
-                    >
-                    </document-media>
+                <div class="list-item__body">
+                    <section class="list-item__content">
+                        <document-media
+                            class="list-item__media"
+                            theme="small"
+                            file-name="[[document.media.fileName]]"
+                            preview-data="[[document.media.previewData]]"
+                        >
+                        </document-media>
 
-                    <div class="list-item__attributes">
                         <document-attributes
+                            class="list-item__attributes"
                             max="3"
                             theme="small"
                             attributes="[[document.attributes]]"
                         >
                         </document-attributes>
+                    </section>
 
+                    <div class="list-item__more">
+                        <a
+                            class="app__hyperlink app__hyperlink--inline"
+                            href\$="[[_getUrl(document)]]"
+                        >
+                            <!-- TODO: Make string localizable -->
+                            more...
+                        </a>
                     </div>
-                </section>
 
-                <div class="list-item__more">
-                    <a
-                        class="app__hyperlink app__hyperlink--inline"
-                        href\$="[[_getUrl(document)]]"
+                    <footer
+                        id="matchContainer"
+                        class="app__bordered list-item__match-container"
+                        hidden="[[!document.matches]]"
                     >
-                        <!-- TODO: Make string localizable -->
-                        more...
-                    </a>
+                    </footer>
                 </div>
-
-                <footer
-                    id="matchContainer"
-                    class="app__bordered list-item__match-container"
-                    hidden="[[!document.matches]]"
-                >
-                </footer>
             </article>
         `;
     }

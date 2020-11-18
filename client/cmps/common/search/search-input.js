@@ -67,6 +67,7 @@ class SearchInput extends PolymerElement {
                     align-items: center;
                     cursor: pointer;
                     padding: 0 var(--space-large);
+                    margin: 0;
                     border: none;
                     background-color: var(--color-button-action);
                 }
@@ -77,7 +78,7 @@ class SearchInput extends PolymerElement {
                 }
             </style>
 
-            <div class="app__bordered app__container search">
+            <div class="search">
 
                 <!-- Extra div required for vertically centering the prefix on IOS devices -->
                 <div

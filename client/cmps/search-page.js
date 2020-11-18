@@ -25,6 +25,7 @@ class SearchPage extends PolymerElement {
 
             <div class="app__section search-container">
                 <search-input
+                    class="app__container app__bordered"
                     value="[[_query]]"
                     prefix="[[_target]]"
                     placeholder="[[_getPlaceholder(_targetType)]]"
