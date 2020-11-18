@@ -27,7 +27,7 @@ class HomePage extends PolymerElement {
                     .search-container {
                         background-image: none;
                         height: auto;
-                        padding: 0 var(--space-medium) var(--space-medium);
+                        padding: 0 var(--space-medium) var(--space-large);
                     }
                 }
             </style>
@@ -35,6 +35,7 @@ class HomePage extends PolymerElement {
             <div class="app__section search-container">
                 <!-- TODO: Make the placeholder string localizable -->
                 <search-input
+                    class="app__container app__bordered"
                     placeholder="Search games, characters and moves"
                     on-invoke-search="_searchInvoked"
                 >
