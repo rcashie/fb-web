@@ -1,12 +1,12 @@
 import '../../common/base/base-button.js';
 import '../../common/styles/app-styles.js';
-import './tag-editor.js';
+import './name-editor.js';
 import '@polymer/polymer/lib/elements/dom-repeat.js';
 import { Debouncer } from '@polymer/polymer/lib/utils/debounce.js';
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { timeOut } from '@polymer/polymer/lib/utils/async.js';
 
-class TagSetEditor extends PolymerElement {
+class NameSetEditor extends PolymerElement {
     static get template() {
         return html`
             <style include="app-styles">
@@ -32,15 +32,15 @@ class TagSetEditor extends PolymerElement {
             <div class="set">
                 <template
                     is="dom-repeat"
-                    items="{{tags}}"
+                    items="{{names}}"
                 >
-                    <tag-editor
-                        id="tag__[[index]]"
+                    <name-editor
+                        id="name__[[index]]"
                         class="set__item"
                         value="{{item}}"
-                        on-remove="_onTagRemoved"
+                        on-remove="_onRemoved"
                     >
-                    </tag-editor>
+                    </name-editor>
                 </template>
 
                 <!-- TODO: Make this string localizable -->
@@ -48,19 +48,19 @@ class TagSetEditor extends PolymerElement {
                     class="set__item"
                     on-click="_onNewClicked"
                 >
-                    + Add Tag
+                    + Add Alias
                 </base-button>
             </div>
         `;
     }
 
     static get is() {
-        return 'tag-set-editor';
+        return 'name-set-editor';
     }
 
     static get properties() {
         return {
-            tags: {
+            names: {
                 type: Array,
                 notify: true,
                 value: () => []
@@ -73,10 +73,10 @@ class TagSetEditor extends PolymerElement {
     }
 
     _onNewClicked() {
-        this.push('tags', '');
+        this.push('names', '');
         const callback = () => {
-            let tagElement = this.shadowRoot.querySelector(`#tag__${this.tags.length - 1}`);
-            tagElement.showEdit();
+            let nameElement = this.shadowRoot.querySelector(`#name__${this.names.length - 1}`);
+            nameElement.showEdit();
         };
 
         this._debounceJob = Debouncer.debounce(
@@ -86,12 +86,12 @@ class TagSetEditor extends PolymerElement {
         );
     }
 
-    _onTagRemoved(event) {
+    _onRemoved(event) {
         const index = event.model.index;
-        this.splice('tags', index, 1);
+        this.splice('names', index, 1);
     }
 }
 
-customElements.define(TagSetEditor.is, TagSetEditor);
+customElements.define(NameSetEditor.is, NameSetEditor);
 
-export { TagSetEditor };
+export { NameSetEditor };

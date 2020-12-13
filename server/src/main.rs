@@ -112,7 +112,7 @@ async fn main() {
         .expect("Unable to load queries into query store");
 
     let config = &json_config["couchbase"];
-    let (docs_adapter, props_adapter, tagsets_adapter, search_adapter) = {
+    let (docs_adapter, props_adapter, name_sets_adapter, search_adapter) = {
         let cluster = couchbase_cluster
             .as_ref()
             .map(|s| s.as_str())
@@ -129,7 +129,7 @@ async fn main() {
     let document_service = document_service::Service::new(
         Arc::new(docs_adapter),
         Arc::new(props_adapter),
-        Arc::new(tagsets_adapter),
+        Arc::new(name_sets_adapter),
     );
 
     // The search sub-service

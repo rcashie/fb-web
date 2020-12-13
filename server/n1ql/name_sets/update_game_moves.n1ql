@@ -1,0 +1,17 @@
+UPSERT INTO `published` (KEY k, VALUE v)
+SELECT RAW {
+    "k": "nset::" || meta(`move`).id,
+    "v": {
+        "game": $id,
+        "character": move.character,
+        "type": "name_set",
+        "names": ARRAY_CONCAT([move.title], move.names),
+        "parentNames": ARRAY_CONCAT(charNameSet.parentNames, charNameSet.names)
+    }
+}
+FROM `published` AS charNameSet
+JOIN `published` AS move ON move.character = SUBSTR(meta(`charNameSet`).id, 12)
+WHERE
+    charNameSet.type = "name_set"
+    AND charNameSet.game = $id
+    AND move.type = "move"

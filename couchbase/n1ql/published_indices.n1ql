@@ -7,5 +7,5 @@ CREATE INDEX `game-char-list` ON `published`(game, title ASC) WHERE type="charac
 -- used by: server/n1ql/documents/get_move_list.n1ql
 CREATE INDEX `char-move-list` ON `published`(character, title ASC) WHERE type="move";
 
--- used by: server/n1ql/tagsets/update_game_moves.n1ql
-CREATE INDEX `tagset-game-char-list` ON `published`(game) WHERE type="tagset";
+-- used by: server/n1ql/name_sets/update_game_moves.n1ql
+CREATE INDEX `name_set-game-char-list` ON `published`(game) WHERE type="name_set";

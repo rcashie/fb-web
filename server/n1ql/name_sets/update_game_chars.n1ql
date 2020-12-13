@@ -1,0 +1,15 @@
+UPSERT INTO `published` (KEY k, VALUE v)
+SELECT RAW {
+    "k": "nset::" || meta(`char`).id,
+    "v": {
+        "game": $id,
+        "type": "name_set",
+        "names": ARRAY_CONCAT([char.title], char.names),
+        "parentNames": gameNameSet.names
+    }
+}
+FROM `published` AS char
+JOIN `published` AS gameNameSet ON KEYS["nset::game::" || char.game]
+WHERE
+    char.type = "character"
+    AND char.game = $id

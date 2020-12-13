@@ -25,14 +25,14 @@ impl Service {
     pub fn new(
         docs_adapter: Arc<couchbase_adapters::Documents>,
         props_adapter: Arc<couchbase_adapters::Proposals>,
-        tagsets_adapter: Arc<couchbase_adapters::TagSets>,
+        name_sets_adapter: Arc<couchbase_adapters::NameSets>,
     ) -> Self {
         Self {
             document_handler: request_handlers::Document::new(docs_adapter.clone()),
             proposal_handler: request_handlers::Proposal::new(
                 props_adapter,
                 docs_adapter,
-                tagsets_adapter,
+                name_sets_adapter,
             ),
         }
     }

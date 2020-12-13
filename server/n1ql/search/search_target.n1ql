@@ -14,16 +14,16 @@ SELECT
         ELSE ( {} )
     END As game,
     { "id": `doc`.character, "title": `move-char`.title } AS character,
-    search_meta(`tagset`).locations AS matches,
-    tagset.tags,
-    tagset.parentTags
-FROM `published` AS tagset
-JOIN `published` AS doc ON KEYS[SUBSTR(meta(`tagset`).id, 6)]
+    search_meta(`name_set`).locations AS matches,
+    name_set.names,
+    name_set.parentNames
+FROM `published` AS name_set
+JOIN `published` AS doc ON KEYS[SUBSTR(meta(`name_set`).id, 6)]
 LEFT OUTER JOIN `published` AS `char-game` ON KEYS["game::" || `doc`.game]
 LEFT OUTER JOIN `published` AS `move-char` ON KEYS["char::" || `doc`.character]
 LEFT OUTER JOIN `published` AS `move-game` ON KEYS["game::" || `move-char`.game]
 WHERE SEARCH(
-    tagset,
+    name_set,
     {
         "query": {
             "must": {
@@ -37,24 +37,24 @@ WHERE SEARCH(
             "should": {
                 "disjuncts": [
                     {
-                        "field": "tags",
+                        "field": "names",
                         "match": $searchTerm,
                         "boost": 1000
                     },
                     {
-                        "field": "parentTags",
+                        "field": "parentNames",
                         "match": $searchTerm,
                         "boost": 100
                     },
                     {
-                        "field": "tags",
+                        "field": "names",
                         "match": $searchTerm,
                         "fuzziness": 2,
                         "prefix_length": 2,
                         "boost": 10
                     },
                     {
-                        "field": "parentTags",
+                        "field": "parentNames",
                         "match": $searchTerm,
                         "prefix_length": 2,
                         "fuzziness": 2
@@ -63,12 +63,12 @@ WHERE SEARCH(
                 "min": 1
             }
         },
-        "fields": ["tags", "parentTags"],
+        "fields": ["names", "parentNames"],
         "highlight": {},
         "sort": ["-_score"],
         "from": $offset,
         "size": $limit
     },
-    { "index": "tagset" }
+    { "index": "name_set" }
 )
-AND tagset.type == "tagset"
+AND name_set.type == "name_set"

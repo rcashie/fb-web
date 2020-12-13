@@ -2,7 +2,7 @@ import '../styles/app-styles.js';
 import '@polymer/polymer/lib/elements/dom-repeat.js';
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 
-class TagSet extends PolymerElement {
+class NameSet extends PolymerElement {
     static get template() {
         return html`
             <style include="app-styles">
@@ -20,7 +20,7 @@ class TagSet extends PolymerElement {
                     font-size: var(--font-size-small);
                 }
 
-                .set__tag {
+                .set__name {
                     padding: var(--space-x-small) var(--space-medium);
                     margin: var(--space-medium) var(--space-medium) 0 0;
                 }
@@ -29,9 +29,9 @@ class TagSet extends PolymerElement {
             <section class="set">
                 <template
                     is="dom-repeat"
-                    items="[[tags]]"
+                    items="[[names]]"
                 >
-                    <div class="app__container app__bordered set__tag">
+                    <div class="app__container app__bordered set__name">
                         [[item]]
                     </div>
                 </template>
@@ -40,12 +40,12 @@ class TagSet extends PolymerElement {
     }
 
     static get is() {
-        return 'tag-set';
+        return 'name-set';
     }
 
     static get properties() {
         return {
-            tags: {
+            names: {
                 type: Array,
                 value: () => []
             }
@@ -53,6 +53,6 @@ class TagSet extends PolymerElement {
     }
 }
 
-customElements.define(TagSet.is, TagSet);
+customElements.define(NameSet.is, NameSet);
 
-export { TagSet };
+export { NameSet };

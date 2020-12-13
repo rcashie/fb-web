@@ -1,9 +1,9 @@
 UPSERT INTO `published` (KEY k, VALUE v)
 SELECT RAW {
-    "k": "tset::game::" || $id,
+    "k": "nset::game::" || $id,
     "v": {
-        "type": "tagset",
-        "tags": ARRAY_CONCAT([game.title], game.tags)
+        "type": "name_set",
+        "names": ARRAY_CONCAT([game.title], game.names)
     }
 }
 FROM `published` AS game

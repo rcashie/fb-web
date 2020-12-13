@@ -5,6 +5,6 @@ SELECT
     game.media,
     game.attributes,
     game.latestAuthors,
-    game.tags
+    game.names
 FROM `published` AS game
 USE KEYS["game::" || $id]

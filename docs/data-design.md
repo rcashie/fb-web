@@ -1,7 +1,7 @@
 # Data Design
 * [Published Documents](#published-documents)
 * [Proposals](#proposals)
-* [Tag Sets](#tag-sets)
+* [Name Sets](#name-sets)
 * [Indices](#database-indices)
 
 ## Published Documents
@@ -146,22 +146,22 @@ The target field contains the id of the new document or an existing document to 
 The id of a proposal itself is the target property value plus the version.
 As an example the fourth proposal created for document sf4 will have the id `sf4::4`.
 
-## Tag Sets
-Tag sets contain a collection of tags for published documents to facilitate searching. A document's `tags` and the tags of all its parents (`parentTags`) are stored in a tag set. A tag set is updated whenever a new version of a document or one of its parents is published. See [tag sets adapter](../server/src/database_adapters/couchbase/tag_sets.rs).
+## Name Sets
+Games, characters and moves can be referred to via different names (Light Kick / Short / LK). To facilitate searching across these aliases we use Name Sets. A document's `names` and the names of all its parents (`parentNames`) are stored in a Name Set. A Name Set is updated whenever a new version of a document or one of its parents is published. See [NameSets adapter](../server/src/database_adapters/couchbase/name_sets.rs).
 
 ### Examples
-Example of a tag set for the character "Ryu":
+Example of a Name Set for the character "Ryu":
 ```js
 {
+  "type": "name_set",
   "game": "sf5",
-  "parentTags": [
+  "parentNames": [
     "Street Fighter V",
     "sf5"
   ],
-  "tags": [
+  "names": [
     "Ryu"
-  ],
-  "type": "tagset"
+  ]
 }
 ```
 

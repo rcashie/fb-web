@@ -3,27 +3,29 @@ CURRENT_DIR=$(dirname "${BASH_SOURCE[0]}")
 DEFAULT_MODE='release'
 
 showUsage() {
-    echo
-    echo "Usage: ./fb.sh command [OPTIONS]"
-    echo
-    echo "./fb.sh run-server [--mode|-m release|debug]"
-    echo "Starts the web-server. This will compile the server if required. Effectively runs 'cargo build'."
-    echo "Default mode is 'release'."
-    echo
-    echo "./fb.sh watch-client [--mode|-m release|debug]"
-    echo "Watches the source of client and triggers a client build when something changes. If the web server is running (run-server) just refresh the browser to see your changes. Effectively runs 'chokidar'."
-    echo "Default mode is 'release'."
-    echo
-    echo "./fb.sh build [--mode|-m release|debug] [--client|-c] [--server|-s]"
-    echo "Builds the specified targets: client, server or both. At least one must be specified."
+    echo -e "$(cat << EOM
+USAGE: ./fb.sh command [OPTIONS]
+
+\e[7m./fb.sh run-server [--mode|-m release|debug]\e[0m
+Starts the web-server. This will compile the server if required. Effectively runs 'cargo build'.
+Default mode is 'release'.
+
+\e[7m./fb.sh watch-client [--mode|-m release|debug]\e[0m
+Watches the source of client and triggers a client build when something changes. If the web server is running (run-server) just refresh the browser to see your changes. Effectively runs 'chokidar'.
+Default mode is 'release'.
+
+\e[7m./fb.sh build [--mode|-m release|debug] [--client|-c] [--server|-s]\e[0m
+Builds the specified targets: client, server or both. At least one must be specified.
+EOM
+)"
 }
 
 printErr() {
-    echo -e "\033[31mError: $1\033[0m" 1>&2
+    echo -e "\e[31mError: $1\e[0m" 1>&2
 }
 
 printInfo() {
-    echo -e "\033[32m$1\033[0m"
+    echo -e "\e[32m$1\e[0m"
 }
 
 checkModeArgument() {

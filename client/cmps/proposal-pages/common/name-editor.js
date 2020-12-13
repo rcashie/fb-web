@@ -4,7 +4,7 @@ import { Debouncer } from '@polymer/polymer/lib/utils/debounce.js';
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { timeOut } from '@polymer/polymer/lib/utils/async.js';
 
-class TagEditor extends PolymerElement {
+class NameEditor extends PolymerElement {
     static get template() {
         return html`
             <style include="app-styles">
@@ -15,11 +15,11 @@ class TagEditor extends PolymerElement {
                     display: inline-block;
                 }
 
-                .tag-container {
+                .name-container {
                     position: relative;
                 }
 
-                .tag {
+                .name {
                     display: flex;
                     flex-flow: row nowrap;
                     justify-content: space-between;
@@ -27,18 +27,18 @@ class TagEditor extends PolymerElement {
                     padding: var(--space-x-small) var(--space-medium);
                 }
 
-                .tag__value {
+                .name__value {
                     min-width: var(--space-large);
                     min-height: var(--line-height-medium);
                 }
 
-                .tag__close {
+                .name__close {
                     width: 1rem;
                     height: 1rem;
                     margin-left: var(--space-medium);
                 }
 
-                .tag__edit {
+                .name__edit {
                     position: absolute;
                     background-color: var(--color-page);
                     padding: var(--space-medium);
@@ -48,13 +48,13 @@ class TagEditor extends PolymerElement {
                 }
             </style>
 
-            <div class="tag-container">
+            <div class="name-container">
                 <div
-                    id="tag"
-                    class="app__container app__bordered tag"
+                    id="name"
+                    class="app__container app__bordered name"
                 >
                     <button
-                        class="app__bare-button tag__value"
+                        class="app__bare-button name__value"
                         type="button"
                         on-click="showEdit"
                     >
@@ -63,7 +63,7 @@ class TagEditor extends PolymerElement {
 
                     <!-- TODO: Make the alt string localizable -->
                     <button
-                        class="app__bare-button tag__close"
+                        class="app__bare-button name__close"
                         type="button"
                         on-click="_onRemoveClicked"
                     >
@@ -78,7 +78,7 @@ class TagEditor extends PolymerElement {
                     is="dom-if"
                     if="[[_showEdit]]"
                 >
-                    <div class="app__container app__bordered app__shadowed tag__edit">
+                    <div class="app__container app__bordered app__shadowed name__edit">
                         <text-input
                             id="textInput"
                             value="{{value}}"
@@ -93,7 +93,7 @@ class TagEditor extends PolymerElement {
     }
 
     static get is() {
-        return 'tag-editor';
+        return 'name-editor';
     }
 
     static get properties() {
@@ -150,6 +150,6 @@ class TagEditor extends PolymerElement {
     }
 }
 
-customElements.define(TagEditor.is, TagEditor);
+customElements.define(NameEditor.is, NameEditor);
 
-export { TagEditor };
+export { NameEditor };

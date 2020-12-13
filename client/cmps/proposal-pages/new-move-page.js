@@ -7,7 +7,7 @@ import '../common/base/text-input.js';
 import '../common/styles/app-styles.js';
 import './common/media-selector.js';
 import './common/proposal-page-styles.js';
-import './common/tag-set-editor.js';
+import './common/name-set-editor.js';
 import '@polymer/iron-ajax/iron-ajax.js';
 import { AttributeSetEditor } from './common/attribute-set-editor.js';
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
@@ -123,13 +123,13 @@ class NewMovePage extends PolymerElement {
                     <span class="page-note">(Upload a video that's less than 1 MB)</span>
                 </media-selector>
 
-                <tag-set-editor
+                <name-set-editor
                     class="page-item"
-                    tags="{{_tags}}"
+                    names="{{_names}}"
                 >
-                    Tags
-                    <span class="page-note">(They help make this move easier to find)</span>
-                </tag-set-editor>
+                    Aliases
+                    <span class="page-note">(Other names this move may be called)</span>
+                </name-set-editor>
 
                 <!-- TODO: Make this string localizable -->
                 <h3 class="app__header app__header--medium page-section-start">
@@ -177,7 +177,7 @@ class NewMovePage extends PolymerElement {
                 value: ''
             },
 
-            _tags: {
+            _names: {
                 type: Array
             },
 
@@ -273,7 +273,7 @@ class NewMovePage extends PolymerElement {
             _charId: document.character.id,
             _id: document.id,
             _title: document.title,
-            _tags: document.tags || [],
+            _names: document.names || [],
             _attributes: attributes,
             _media: document.media || {}
         });
@@ -307,7 +307,7 @@ class NewMovePage extends PolymerElement {
                 title: this._title,
                 attributes: this._attributes,
                 media: this._media,
-                tags: this._tags
+                names: this._names
             }
         };
 

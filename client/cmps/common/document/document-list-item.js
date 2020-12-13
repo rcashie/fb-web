@@ -133,7 +133,7 @@ class DocumentListItem extends PolymerElement {
         };
     }
 
-    static _buildTagMatchMap(termMatches) {
+    static _buildNameMatchMap(termMatches) {
         /* Example input into this function
         {
             "term": [
@@ -152,15 +152,15 @@ class DocumentListItem extends PolymerElement {
         }
         */
 
-        let tagMatchMap = new Map();
+        let nameMatchMap = new Map();
         Object.values(termMatches).forEach(matches => {
             matches.forEach(match => {
-                match.array_positions.forEach(tagIndex => {
-                    if (!tagMatchMap[tagIndex]) {
-                        tagMatchMap[tagIndex] = [];
+                match.array_positions.forEach(nameIndex => {
+                    if (!nameMatchMap[nameIndex]) {
+                        nameMatchMap[nameIndex] = [];
                     }
 
-                    tagMatchMap[tagIndex].push({
+                    nameMatchMap[nameIndex].push({
                         start: match.start,
                         end: match.end,
                     });
@@ -169,11 +169,11 @@ class DocumentListItem extends PolymerElement {
         });
 
         // Make sure we sort by start position
-        Object.values(tagMatchMap).forEach(infoArray => {
+        Object.values(nameMatchMap).forEach(infoArray => {
             infoArray.sort((left, right) => left.start - right.start);
         });
 
-        return tagMatchMap;
+        return nameMatchMap;
     }
 
     static _escapeText(unsafe) {
@@ -188,33 +188,33 @@ class DocumentListItem extends PolymerElement {
         });
     }
 
-    static _markTag(tag, tagIndex, tagMatchMap) {
-        const matchInfoArray = tagMatchMap[tagIndex];
+    static _markName(name, nameIndex, nameMatchMap) {
+        const matchInfoArray = nameMatchMap[nameIndex];
 
         // Assuming we have no overlap across matches...
-        // break the tag into parts using the match positions.
-        // Then join them back together with mark tags.
+        // break the name into parts using the match positions.
+        // Then join them back together with mark names.
         let parts = [];
         let currentPos = 0;
         matchInfoArray.forEach(info => {
             if (currentPos < info.start) {
                 parts.push({
-                    text: tag.substring(currentPos, info.start),
+                    text: name.substring(currentPos, info.start),
                     mark: false
                 });
             }
 
             parts.push({
-                text: tag.substring(info.start, info.end),
+                text: name.substring(info.start, info.end),
                 mark: true
             });
 
             currentPos = info.end;
         });
 
-        if (currentPos < tag.length) {
+        if (currentPos < name.length) {
             parts.push({
-                text: tag.substring(currentPos),
+                text: name.substring(currentPos),
                 mark: false
             });
         }
@@ -225,13 +225,16 @@ class DocumentListItem extends PolymerElement {
         }).join('');
     }
 
-    static _buildElementsForTags(tags, termMatches) {
-        const tagMatchMap = DocumentListItem._buildTagMatchMap(termMatches);
+    static _buildElementsForNames(names, termMatches) {
+        const nameMatchMap = DocumentListItem._buildNameMatchMap(termMatches);
 
         let result = [];
-        tags.forEach((tag, index) => {
-            if (!tagMatchMap[index]) return;
-            const marked = DocumentListItem._markTag(tag, index, tagMatchMap);
+        names.forEach((name, index) => {
+            // Continue if we don't have a match
+            if (!nameMatchMap[index]) return;
+
+            // Otherwise build the element
+            const marked = DocumentListItem._markName(name, index, nameMatchMap);
             result.push(`<span>${marked}</span>`);
         });
 
@@ -243,19 +246,19 @@ class DocumentListItem extends PolymerElement {
             return;
         }
 
-        const parentTags = document.parentTags ?
-            DocumentListItem._buildElementsForTags(
-                document.parentTags,
-                document.matches.parentTags || {}
+        const parentNames = document.parentNames ?
+            DocumentListItem._buildElementsForNames(
+                document.parentNames,
+                document.matches.parentNames || {}
             )
             : [];
 
-        const tags = DocumentListItem._buildElementsForTags(
-            document.tags,
-            document.matches.tags || {}
+        const names = DocumentListItem._buildElementsForNames(
+            document.names,
+            document.matches.names || {}
         );
 
-        const html = parentTags.concat(tags).join('');
+        const html = parentNames.concat(names).join('');
         this.shadowRoot.querySelector('#matchContainer').innerHTML = html;
     }
 
