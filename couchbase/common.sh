@@ -1,10 +1,10 @@
 #!/bin/bash
 printErr() {
-    echo -e "\033[31mError: $1\033[0m" 1>&2
+    echo -e "\e[31mError: $1\e[0m" 1>&2
 }
 
 printInfo() {
-    echo -e "\033[32m$1\033[0m"
+    echo -e "\e[32m$1\e[0m"
 }
 
 checkExitCode() {

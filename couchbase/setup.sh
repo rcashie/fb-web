@@ -129,7 +129,7 @@ createFtsIndices() {
         -H "Authorization: Basic $(echo -n "$user:$password" | base64)" \
         -H "Content-Type: application/json" \
         -o /dev/null \
-        "http://$cluster:8094/api/index/tagset")
+        "http://$cluster:8094/api/index/name_set")
 
     checkExitCode "Failed to delete FTS index"
     if [ "$status" -ne "200" ] && [ "$status" -ne "400" ]; then
@@ -146,7 +146,7 @@ createFtsIndices() {
         -H "Content-Type: application/json" \
         -d "$fts_index" \
         -o /dev/null \
-        "http://$cluster:8094/api/index/tagset")
+        "http://$cluster:8094/api/index/name_set")
 
 
     checkExitCode "Failed to update FTS index"
@@ -160,7 +160,7 @@ createFtsIndices() {
 
 createBucketIndices() {
     printInfo "Getting existing indices..."
-    query="SELECT RAW (\"\`\" || keyspace_id || \"\`.\`\" || name || \"\`\") FROM system:indexes WHERE name != \"tagset\""
+    query="SELECT RAW (\"\`\" || keyspace_id || \"\`.\`\" || name || \"\`\") FROM system:indexes WHERE name != \"name_set\""
     result=$(runQueryScript "$query")
     checkExitCode "$result"
 

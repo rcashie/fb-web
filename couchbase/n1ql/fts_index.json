@@ -10,7 +10,7 @@
         "mapping": {
             "analysis": {
                 "analyzers": {
-                    "tagset-analyzer": {
+                    "name_set-analyzer": {
                         "token_filters": [
                             "stop_en",
                             "to_lower",
@@ -21,7 +21,7 @@
                     }
                 }
             },
-            "default_analyzer": "tagset-analyzer",
+            "default_analyzer": "name_set-analyzer",
             "default_datetime_parser": "dateTimeOptional",
             "default_field": "_all",
             "default_mapping": {
@@ -34,7 +34,7 @@
             "store_dynamic": false,
             "type_field": "_type",
             "types": {
-                "tagset": {
+                "name_set": {
                     "dynamic": false,
                     "enabled": true,
                     "properties": {
@@ -62,26 +62,26 @@
                                 }
                             ]
                         },
-                        "parentTags": {
+                        "parentNames": {
                             "enabled": true,
                             "dynamic": false,
                             "fields": [
                                 {
                                     "include_term_vectors": true,
                                     "index": true,
-                                    "name": "parentTags",
+                                    "name": "parentNames",
                                     "type": "text"
                                 }
                             ]
                         },
-                        "tags": {
+                        "names": {
                             "enabled": true,
                             "dynamic": false,
                             "fields": [
                                 {
                                     "include_term_vectors": true,
                                     "index": true,
-                                    "name": "tags",
+                                    "name": "names",
                                     "type": "text"
                                 }
                             ]
