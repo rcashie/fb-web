@@ -1,4 +1,4 @@
-import '../../common/base/tag-set.js';
+import '../../common/base/name-set.js';
 import '../../common/document/document-attributes.js';
 import '../../common/document/document-media.js';
 import '../../common/styles/app-styles.js';
@@ -28,17 +28,17 @@ class ProposalItem extends PolymerElement {
                     margin: 0 var(--space-medium);
                 }
 
-                .tags {
+                .names {
                     margin: var(--space-section) var(--space-medium) var(--space-medium) var(--space-medium);
                 }
 
-                .tags__header {
+                .names__header {
                     display: flex;
                     align-items: center;
                     margin-bottom: var(--space-small);
                 }
 
-                .tags__icon {
+                .names__icon {
                     width: 1rem;
                     height: 1rem;
                     margin-right: var(--space-small);
@@ -64,14 +64,14 @@ class ProposalItem extends PolymerElement {
                 >
                 </document-attributes>
 
-                <footer class="tags">
+                <footer class="names">
                     <!-- TODO: Make this string localizable -->
-                    <div class="app__header tags_header">
-                        Tags
+                    <div class="app__header names_header">
+                        Aliases
                     </div>
 
-                    <tag-set tags="[[proposal.document.tags]]">
-                    </tag-set>
+                    <name-set names="[[proposal.document.names]]">
+                    </name-set>
                 </footer>
             </article>
         `;

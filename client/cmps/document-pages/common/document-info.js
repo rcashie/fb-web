@@ -1,4 +1,4 @@
-import '../../common/base/tag-set.js';
+import '../../common/base/name-set.js';
 import '../../common/document/document-attributes.js';
 import '../../common/document/document-breadcrumbs.js';
 import '../../common/document/document-media.js';
