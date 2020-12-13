@@ -1,15 +1,15 @@
 UPSERT INTO `published` (KEY k, VALUE v)
 SELECT RAW {
-    "k": "tset::" || meta(`char`).id,
+    "k": "nset::" || meta(`char`).id,
     "v": {
         "game": $id,
-        "type": "tagset",
-        "tags": ARRAY_CONCAT([char.title], char.tags),
-        "parentTags": gameTagSet.tags
+        "type": "name_set",
+        "names": ARRAY_CONCAT([char.title], char.names),
+        "parentNames": gameNameSet.names
     }
 }
 FROM `published` AS char
-JOIN `published` AS gameTagSet ON KEYS["tset::game::" || char.game]
+JOIN `published` AS gameNameSet ON KEYS["nset::game::" || char.game]
 WHERE
     char.type = "character"
     AND char.game = $id

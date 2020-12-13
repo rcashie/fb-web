@@ -1,13 +1,13 @@
 UPSERT INTO `published` (KEY k, VALUE v)
 SELECT RAW {
-    "k": "tset::char::" || $id,
+    "k": "nset::char::" || $id,
     "v": {
         "game": char.game,
-        "type": "tagset",
-        "tags": ARRAY_CONCAT([char.title], char.tags),
-        "parentTags": gameTagSet.tags
+        "type": "name_set",
+        "names": ARRAY_CONCAT([char.title], char.names),
+        "parentNames": gameNameSet.names
     }
 }
 FROM `published` AS char
 USE KEYS["char::" || $id]
-JOIN `published` AS gameTagSet ON KEYS["tset::game::" || char.game]
+JOIN `published` AS gameNameSet ON KEYS["nset::game::" || char.game]

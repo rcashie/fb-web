@@ -1,14 +1,14 @@
 UPSERT INTO `published` (KEY k, VALUE v)
 SELECT RAW {
-    "k": "tset::move::" || $id,
+    "k": "nset::move::" || $id,
     "v": {
-        "game": charTagSet.game,
+        "game": charNameSet.game,
         "character": move.character,
-        "type": "tagset",
-        "tags": ARRAY_CONCAT([move.title], move.tags),
-        "parentTags": ARRAY_CONCAT(charTagSet.parentTags, charTagSet.tags)
+        "type": "name_set",
+        "names": ARRAY_CONCAT([move.title], move.names),
+        "parentNames": ARRAY_CONCAT(charNameSet.parentNames, charNameSet.names)
     }
 }
 FROM `published` AS move
 USE KEYS["move::" || $id]
-JOIN `published` AS charTagSet ON KEYS["tset::char::" || move.character]
+JOIN `published` AS charNameSet ON KEYS["nset::char::" || move.character]

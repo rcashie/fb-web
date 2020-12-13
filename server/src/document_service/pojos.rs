@@ -36,16 +36,16 @@ macro_rules! impl_doc_trait {
                     attr.value = attr.value.trim().to_owned();
                 }
 
-                // Trim and remove duplicate or empty tags
-                let mut tags = HashSet::with_capacity($self_.tags.len());
-                for tag in &$self_.tags {
-                    let tag = tag.trim();
-                    if !tag.is_empty() {
-                        tags.insert(tag.to_owned());
+                // Trim and remove duplicate or empty names
+                let mut names = HashSet::with_capacity($self_.names.len());
+                for name in &$self_.names {
+                    let name = name.trim();
+                    if !name.is_empty() {
+                        names.insert(name.to_owned());
                     }
                 }
 
-                $self_.tags = tags.into_iter().collect();
+                $self_.names = names.into_iter().collect();
             }
         }
     }
@@ -75,7 +75,7 @@ pub struct Game {
     #[serde(rename = "type", default = "get_type_game")]
     pub doc_type: String,
     pub attributes: Vec<Attribute>,
-    pub tags: Vec<String>,
+    pub names: Vec<String>,
     pub media: Media,
 }
 
@@ -89,7 +89,7 @@ pub struct Character {
     pub doc_type: String,
     pub game: String,
     pub attributes: Vec<Attribute>,
-    pub tags: Vec<String>,
+    pub names: Vec<String>,
     pub media: Media,
 }
 
@@ -103,7 +103,7 @@ pub struct Move {
     pub doc_type: String,
     pub character: String,
     pub attributes: Vec<Attribute>,
-    pub tags: Vec<String>,
+    pub names: Vec<String>,
     pub media: Media,
 }
 
