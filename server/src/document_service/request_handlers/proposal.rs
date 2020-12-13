@@ -45,19 +45,19 @@ use std::{
 pub struct Proposal {
     props_adapter: Arc<couchbase_adapters::Proposals>,
     docs_adapter: Arc<couchbase_adapters::Documents>,
-    tagsets_adapter: Arc<couchbase_adapters::TagSets>,
+    name_sets_adapter: Arc<couchbase_adapters::NameSets>,
 }
 
 impl Proposal {
     pub fn new(
         props_adapter: Arc<couchbase_adapters::Proposals>,
         docs_adapter: Arc<couchbase_adapters::Documents>,
-        tagsets_adapter: Arc<couchbase_adapters::TagSets>,
+        name_sets_adapter: Arc<couchbase_adapters::NameSets>,
     ) -> Self {
         Self {
             props_adapter,
             docs_adapter,
-            tagsets_adapter,
+            name_sets_adapter,
         }
     }
 
@@ -462,14 +462,14 @@ impl Proposal {
             HttpError::InternalError(None)
         })?;
 
-        // Update tagsets for full text searching
+        // Update name_sets for full text searching
         match doc_type {
-            "game" => self.tagsets_adapter.update_game(&target).await,
-            "character" => self.tagsets_adapter.update_char(&target).await,
-            _ => self.tagsets_adapter.update_move(&target).await,
+            "game" => self.name_sets_adapter.update_game(&target).await,
+            "character" => self.name_sets_adapter.update_char(&target).await,
+            _ => self.name_sets_adapter.update_move(&target).await,
         }
         .map_err(|error| {
-            error!("Failed to update tagset for document: {:?}", error);
+            error!("Failed to update name_set for document: {:?}", error);
             HttpError::InternalError(None)
         })
     }

@@ -3,7 +3,7 @@ mod proposals;
 mod query_executor;
 mod query_store;
 mod search;
-mod tag_sets;
+mod name_sets;
 
 use couchbase;
 use query_executor::QueryExecutor;
@@ -14,7 +14,7 @@ pub use self::{
     proposals::Proposals,
     query_store::QueryStore,
     search::Search,
-    tag_sets::TagSets,
+    name_sets::NameSets,
 };
 
 /// Creates instances of all adapters for a couchbase database
@@ -23,7 +23,7 @@ pub fn create_adapters(
     user: &str,
     password: &str,
     query_store: QueryStore,
-) -> (Documents, Proposals, TagSets, Search) {
+) -> (Documents, Proposals, NameSets, Search) {
     let cluster = couchbase::Cluster::connect(
         format!("couchbase://{host}", host = host),
         user.to_owned(),
@@ -35,7 +35,7 @@ pub fn create_adapters(
     (
         Documents::new(query_exec.clone()),
         Proposals::new(query_exec.clone()),
-        TagSets::new(query_exec.clone()),
+        NameSets::new(query_exec.clone()),
         Search::new(query_exec),
     )
 }
