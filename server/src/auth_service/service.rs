@@ -319,7 +319,7 @@ impl Service {
 
         body::aggregate(response)
             .await
-            .map(|mut buf| buf.to_bytes())
+            .map(|mut buf| buf.copy_to_bytes(buf.remaining()))
             .map_err(|error| {
                 error!("Unexpected error while collecting body: {}", error);
                 HttpError::InternalError(None)
@@ -383,10 +383,12 @@ impl Service {
         (nonce, encode(&header, &claims, &secret).unwrap())
     }
 
-    fn get_https_client() -> Client<HttpsConnector<HttpConnector>> {
+    fn get_https_client() -> Client<HttpsConnector<HttpConnector>, Body> {
         // TODO: Should this https connector be saved and shared?
-        let connector = HttpsConnector::new();
-        Client::builder().pool_max_idle_per_host(0).build(connector)
+        let connector = HttpsConnector::with_native_roots();
+        Client::builder()
+            .http2_only(false)
+            .build(connector)
     }
 
     fn get_current_time_secs() -> u64 {

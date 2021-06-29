@@ -8,7 +8,7 @@
         "password": "<password>"
     },
     "file-service": {
-        "content-dir": "../client/build/dist",
+        "content-dir": "../client/build/static",
         "uploads-dir": "./uploads",
         "not-found-file": "src/404.html"
     },

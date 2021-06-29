@@ -30,6 +30,7 @@ pub enum Session {
 fn build_nonce() -> String {
     thread_rng()
         .sample_iter(&Alphanumeric)
+        .map(char::from)
         .take(32)
         .collect::<String>()
 }

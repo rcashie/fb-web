@@ -35,7 +35,10 @@ use tokio::{
         remove_dir_all,
         File,
     },
-    prelude::*,
+    io::{
+        AsyncReadExt,
+        AsyncWriteExt,
+    },
     process::Command,
 };
 
@@ -120,12 +123,12 @@ impl Service {
                     &dir, error
                 );
             }
-        };
+        }
 
         // Save the uploaded file there
         let content = body::aggregate(body)
             .await
-            .map(|mut buf| buf.to_bytes())
+            .map(|mut buf| buf.copy_to_bytes(buf.remaining()))
             .map_err(|error| {
                 error!("Unexpected error while collecting body: {}", error);
                 HttpError::InternalError(None)
@@ -302,7 +305,7 @@ impl Service {
         fn convert_error<T: Display>(error: T) -> HttpError {
             let message = format!("Invalid Content-Length value: {}", error);
             HttpError::BadRequest(message.into())
-        };
+        }
 
         let length = entry.to_str().map_err(convert_error)?;
         length.parse::<u32>().map_err(convert_error)
