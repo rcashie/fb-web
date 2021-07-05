@@ -1,9 +1,9 @@
 mod documents;
+mod name_sets;
 mod proposals;
 mod query_executor;
 mod query_store;
 mod search;
-mod name_sets;
 
 use couchbase;
 use query_executor::QueryExecutor;
@@ -11,10 +11,10 @@ use std::sync::Arc;
 
 pub use self::{
     documents::Documents,
+    name_sets::NameSets,
     proposals::Proposals,
     query_store::QueryStore,
     search::Search,
-    name_sets::NameSets,
 };
 
 /// Creates instances of all adapters for a couchbase database

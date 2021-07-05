@@ -229,7 +229,7 @@ impl Proposal {
     {
         let bytes = hyper::body::aggregate(body)
             .await
-            .map(|mut buf| buf.to_bytes())
+            .map(|mut buf| buf.copy_to_bytes(buf.remaining()))
             .map_err(|error| {
                 error!("Unexpected error while collecting body: {}", error);
                 HttpError::InternalError(None)
